@@ -44,13 +44,16 @@ body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;f
 /* LAYOUT */
 .wrap{padding-top:50px}
 .con{max-width:1200px;margin:0 auto;padding:0 32px}
-.sec{padding:60px 0 52px;border-bottom:1px solid var(--border)}
+/* .sec padding handled above */
 .sec-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:.25em;text-transform:uppercase;margin-bottom:7px}
-.sec-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;line-height:1.15;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
-.sec-title::after{content:'▼';font-size:14px;color:var(--gold);opacity:.6;transition:transform .2s;font-family:'DM Mono',monospace;margin-left:12px;flex-shrink:0}
-.sec.open .sec-title::after{content:'▲'}
-.sec-body{display:none}
+.sec-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;line-height:1.15;margin-bottom:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;padding-bottom:16px}
+.sec-title:hover{color:var(--gold-dk)}
+.sec-title::after{content:'+ expand';font-size:10px;color:var(--gold);font-family:'DM Mono',monospace;margin-left:16px;flex-shrink:0;letter-spacing:.1em;text-transform:uppercase;opacity:.7;border:1px solid var(--gold);padding:3px 10px;border-radius:2px;white-space:nowrap}
+.sec.open .sec-title::after{content:'− collapse'}
+.sec-body{display:none;padding-top:12px}
 .sec.open .sec-body{display:block}
+.sec{border-bottom:1px solid var(--border);padding:40px 0 0}
+.sec.open{padding-bottom:40px}
 .sec-intro{color:var(--muted);max-width:700px;margin-bottom:36px;font-size:13.5px;line-height:1.75}
 h3.sh{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:14px;margin-top:36px}
 h3.sh:first-of-type{margin-top:0}
@@ -330,7 +333,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
   <div class="sec-lbl">Section 01</div>
   <h2 class="sec-title" onclick="toggleSec('s1')">Market Averages — Ealing &amp; West London 2026</h2>
   <div class="sec-body">
-  <p class="sec-intro">Aggregated from Tier-1 nurseries in the W5/W3 catchment. Excludes Bumble Bees (different model), Maria Montessori and Melrose (term-time, short hours). Sources in §2.</p>
+    <p class="sec-intro">Aggregated from Tier-1 nurseries in the W5/W3 catchment. Excludes Bumble Bees (different model), Maria Montessori and Melrose (term-time, short hours). Sources in §2.</p>
 
   <h3 class="sh">Session Fees</h3>
   <div class="stats4">
@@ -364,13 +367,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
   </div>
   <div class="note"><strong>IQ Nurseries at 121 places will be the largest single private nursery in Ealing borough.</strong> Nearest peers: Fennies 88 places, Busy Bees Acton 2 at 116 places (W3). Scale means lower cost per child and more flexibility in staffing ratios. <strong>At launch, expect a higher proportion of part-week children</strong> — this is normal and modelled in Scenario A defaults. Full-week ratio expected to grow as the nursery establishes reputation.</div>
 </div>
+</div>
 
 <!-- §2 BENCHMARKS -->
 <div class="sec" id="s2">
   <div class="sec-lbl">Section 02</div>
   <h2 class="sec-title" onclick="toggleSec('s2')">Benchmarks by Data Type</h2>
   <div class="sec-body">
-  <p class="sec-intro">Each block covers one pricing dimension. (est.) = not published online, estimated from market norms.</p>
+    <p class="sec-intro">Each block covers one pricing dimension. (est.) = not published online, estimated from market norms.</p>
 
   <!-- 2.1 Full-day -->
   <div class="bench-block">
@@ -455,13 +459,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
     </div>
   </div>
 </div>
+</div>
 
 <!-- §3 HOW WE BILL -->
 <div class="sec" id="s3">
   <div class="sec-lbl">Section 03</div>
   <h2 class="sec-title" onclick="toggleSec('s3')">How Parents Pay — Billing Mechanics</h2>
   <div class="sec-body">
-  <p class="sec-intro">One fixed monthly Direct Debit. Day rates are a pricing and benchmarking unit — not what appears on the invoice. Below is the full calculation mechanics including a worked example.</p>
+    <p class="sec-intro">One fixed monthly Direct Debit. Day rates are a pricing and benchmarking unit — not what appears on the invoice. Below is the full calculation mechanics including a worked example.</p>
 
   <div class="bill-grid">
     <div class="bill-card">
@@ -553,13 +558,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
   </div>
   <div class="note" id="ex-note"></div>
 </div>
+</div>
 
 <!-- §4 FEE SCHEDULE WITH SLIDERS -->
 <div class="sec" id="s4">
   <div class="sec-lbl">Section 04</div>
   <h2 class="sec-title" onclick="toggleSec('s4')">IQ Nurseries — Fee Schedule by Age Group</h2>
   <div class="sec-body">
-  <p class="sec-intro">Adjust the day rate slider on each group. All derived values (hourly, monthly 5d, monthly 3d) update automatically. Benchmark values are shown for reference — recommended defaults are pre-set. <strong>Part-week example: £90/day × 3d × 4.25wks = £1,147/mth.</strong></p>
+    <p class="sec-intro">Adjust the day rate slider on each group. All derived values (hourly, monthly 5d, monthly 3d) update automatically. Benchmark values are shown for reference — recommended defaults are pre-set. <strong>Part-week example: £90/day × 3d × 4.25wks = £1,147/mth.</strong></p>
 
   <div class="ag-grid" id="ag-grid">
     <!-- built by JS -->
@@ -569,13 +575,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
     <strong>Blended daily rate:</strong> <span id="blended-val">—</span> across all 121 places. All figures use 10-hour day (08:00–18:00) · 51 weeks/year. Early start 07:30–08:00: +£15/day. Late pick-up 18:00–18:30: +£15/day. Both optional, pre-booked.
   </div>
 </div>
+</div>
 
 <!-- §5 SCENARIO A — BASE -->
 <div class="sec" id="s5">
   <div class="sec-lbl">Section 05</div>
   <h2 class="sec-title" onclick="toggleSec('s5')">Revenue Scenarios</h2>
   <div class="sec-body">
-  <p class="sec-intro">Two scenarios based on the fee schedule above. Scenario A uses fixed market-average assumptions. Results update if you change the day rate sliders in §4.</p>
+    <p class="sec-intro">Two scenarios based on the fee schedule above. Scenario A uses fixed market-average assumptions. Results update if you change the day rate sliders in §4.</p>
 
   <div class="scenario-badge sc-a-badge">Scenario A — Base</div>
   <div class="scenario-title">Market-Average Assumptions · Fixed Mix (incl. Part-Week)</div>
@@ -662,15 +669,16 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
     </div>
   </div>
 </div>
+</div>
 
 
 <!-- §6 SCENARIO B — INTERACTIVE -->
 <div class="sec" id="s6">
   <div class="sec-lbl">Section 06</div>
-  <div class="sec-body">
-  <div class="scenario-badge sc-b-badge">Scenario B — Interactive</div>
+    <div class="scenario-badge sc-b-badge">Scenario B — Interactive</div>
   <div class="scenario-title" onclick="toggleSec('s6')" style="cursor:pointer;user-select:none;display:flex;justify-content:space-between;align-items:center">Adjust Any Parameter · Compare vs Scenario A <span id="s6-arrow" style="font-size:12px;color:var(--gold);opacity:.6;font-family:'DM Mono',monospace">▲</span></div>
   <div class="scenario-sub" style="margin-bottom:16px">All changes show delta vs Scenario A in green/red. Day rates are inherited from §4 sliders but can be overridden per group here. <strong>Use Part-time % and Part-time days/wk sliders to model different launch-phase mixes.</strong> Example: Pre-School 40% PT on 3d/wk = realistic Q1 scenario at launch. Increasing full-week share over time shows maturation trajectory.</div>
+  <div class="sec-body">
 
   <div class="sc-b-wrap">
     <div class="sc-b-toolbar">
@@ -741,15 +749,13 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
   </div>
 </div>
 </div>
-</div>
 
 <!-- §7 ADD-ONS -->
 <div class="sec" id="s7">
   <div class="sec-lbl">Section 07</div>
-  <h2 class="sec-title" onclick="toggleSec('s7')" onclick="toggleSec('s6')">Add-On Revenue</h2>
+  <h2 class="sec-title" onclick="toggleSec('s7')">Add-On Revenue</h2>
   <div class="sec-body">
-  <div class="sec-body">
-  <div class="tbw">
+      <div class="tbw">
     <table>
       <thead><tr><th>Stream</th><th>Rate</th><th>Scale</th><th>Annual est.</th><th>Benchmark</th></tr></thead>
       <tbody>
@@ -775,13 +781,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
     </table>
   </div>
 </div>
+</div>
 
 <!-- §8 UNIT ECONOMICS & P&L -->
 <div class="sec" id="s8">
   <div class="sec-lbl">Section 08</div>
   <h2 class="sec-title" onclick="toggleSec('s8')">Unit Economics &amp; P&amp;L</h2>
   <div class="sec-body">
-
+  
   <!-- BABY RETENTION INSIGHT -->
   <div style="background:var(--ink);border-radius:var(--r);padding:24px 28px;margin-bottom:28px;color:var(--paper)">
     <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px">💡 Baby Retention Premium — The Compounding Advantage</div>
@@ -980,13 +987,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 
   <div class="note"><strong>Note on tax:</strong> Income tax estimated at 25% of operating profit (UK corporation tax). Depreciation not modelled. Setup costs (Y1 only) treated as exceptional operating expense. Source for cost structure: Kidz1 Business Plan v1 June 2025 — figures to be updated once IQ Nurseries lease and staffing contracts are finalised.</div>
 </div>
+</div>
 
 <!-- §9 LTV MODEL -->
 <div class="sec" id="s9">
   <div class="sec-lbl">Section 09</div>
   <h2 class="sec-title" onclick="toggleSec('s9')">Cohort LTV — Which Children Are Most Valuable Over Time?</h2>
   <div class="sec-body">
-  <p class="sec-intro">A baby enrolled at 6 months generates revenue across 4 rooms over 4+ years. This section models cumulative revenue per annual intake cohort by entry group — accounting for churn, room progression, and changing revenue per child as they age. Toggle retention assumptions and scenario to see how the picture shifts.</p>
+    <p class="sec-intro">A baby enrolled at 6 months generates revenue across 4 rooms over 4+ years. This section models cumulative revenue per annual intake cohort by entry group — accounting for churn, room progression, and changing revenue per child as they age. Toggle retention assumptions and scenario to see how the picture shifts.</p>
 
   <div style="background:var(--cream);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-bottom:20px">
     <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold-dk);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px">Parameters</div>
@@ -1008,13 +1016,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
   <div id="ltv-table-wrap"></div>
   <div class="note" id="ltv-conclusion" style="margin-top:16px"></div>
 </div>
+</div>
 
 <!-- §10 OPTIMISATION -->
 <div class="sec" id="s10">
   <div class="sec-lbl">Section 10</div>
   <h2 class="sec-title" onclick="toggleSec('s10')">Portfolio Optimisation — What Mix of Children Should We Target?</h2>
   <div class="sec-body">
-  <p class="sec-intro">This section answers a single question mathematically: <strong>given 121 fixed places, what combination of age groups generates the most value?</strong> We tested 62,732 combinations and ran sensitivity analysis across multiple scenarios. Below is the result — explained without jargon.</p>
+    <p class="sec-intro">This section answers a single question mathematically: <strong>given 121 fixed places, what combination of age groups generates the most value?</strong> We tested 62,732 combinations and ran sensitivity analysis across multiple scenarios. Below is the result — explained without jargon.</p>
 
   <!-- THE BIG IDEA -->
   <div style="background:var(--ink);border-radius:var(--r);padding:28px 32px;margin-bottom:28px;color:var(--paper)">
@@ -1294,13 +1303,14 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
     </div>
   </div>
 </div>
+</div>
 
 <!-- §11 ROOM PLANNER -->
 <div class="sec" id="s11">
   <div class="sec-lbl">Section 11</div>
   <h2 class="sec-title" onclick="toggleSec('s11')">Room Planner — Capacity by Physical Layout</h2>
   <div class="sec-body">
-  <p class="sec-intro">Each room has a fixed floor area. EYFS regulations set minimum space per child: <strong>3.5 sqm</strong> for Babies (under 2), <strong>2.5 sqm</strong> for Toddlers (2–3yr), <strong>2.3 sqm</strong> for Pre-School (3–5yr). Change which age group occupies each room — the model recalculates total capacity, revenue, costs, profit, LTV and Score in real time.</p>
+    <p class="sec-intro">Each room has a fixed floor area. EYFS regulations set minimum space per child: <strong>3.5 sqm</strong> for Babies (under 2), <strong>2.5 sqm</strong> for Toddlers (2–3yr), <strong>2.3 sqm</strong> for Pre-School (3–5yr). Change which age group occupies each room — the model recalculates total capacity, revenue, costs, profit, LTV and Score in real time.</p>
 
   <div style="background:var(--cream);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:20px;font-size:13px">
     <strong>How to use:</strong> Click a room to cycle through age groups (Babies → Baby/Toddler → Toddlers → Pre-School). Capacity updates automatically based on EYFS sq m rules. The P&L and Score below update instantly.
@@ -1314,6 +1324,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
   <div id="s11-summary" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px"></div>
   <div id="s11-pl-wrap" style="margin-bottom:24px"></div>
   <div class="note" id="s11-note" style="margin-top:12px"></div>
+</div>
 </div>
 
 <!-- FOOTER -->
@@ -3684,6 +3695,7 @@ secs.forEach(s=>new IntersectionObserver(entries=>{
       </svg>
     </button>
   </div>
+</div>
 </div>
 
 <script>
