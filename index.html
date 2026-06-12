@@ -317,7 +317,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
       <span class="chip">Dickens Yard W5 2TD</span>
     </div>
     <div class="cover-addr">📍 Dickens Yard, Ealing Broadway, London W5 2TD</div>
-    <p class="cover-desc">Market-benchmarked pricing framework. Section 4 fee cards update live from a single daily rate slider. Two revenue scenarios: fixed base model and interactive calculator.</p>
+
   </div>
   <div class="cover-foot">
     <span>IQ Nurseries Ltd — Internal Document</span>
@@ -674,10 +674,17 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 
 <!-- §6 SCENARIO B — INTERACTIVE -->
 <div class="sec" id="s6">
-  <div class="sec-lbl">Section 06</div>
-    <div class="scenario-badge sc-b-badge">Scenario B — Interactive</div>
-  <div class="scenario-title" onclick="toggleSec('s6')" style="cursor:pointer;user-select:none;display:flex;justify-content:space-between;align-items:center">Adjust Any Parameter · Compare vs Scenario A <span id="s6-arrow" style="font-size:12px;color:var(--gold);opacity:.6;font-family:'DM Mono',monospace">▲</span></div>
-  <div class="scenario-sub" style="margin-bottom:16px">All changes show delta vs Scenario A in green/red. Day rates are inherited from §4 sliders but can be overridden per group here. <strong>Use Part-time % and Part-time days/wk sliders to model different launch-phase mixes.</strong> Example: Pre-School 40% PT on 3d/wk = realistic Q1 scenario at launch. Increasing full-week share over time shows maturation trajectory.</div>
+  <div onclick="toggleSec('s6')" style="cursor:pointer;user-select:none;padding-bottom:16px;display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div class="sec-lbl" style="margin-bottom:6px">Section 06</div>
+        <div class="scenario-badge sc-b-badge" style="display:inline-block;margin-bottom:8px">Scenario B — Interactive</div>
+        <div class="scenario-title" style="font-size:30px;font-weight:700;font-family:'Playfair Display',serif;line-height:1.15">Adjust Any Parameter · Compare vs Scenario A</div>
+      </div>
+      <span id="s6-arrow" style="flex-shrink:0;margin-left:16px;margin-top:4px;font-size:10px;color:var(--gold);font-family:'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;opacity:.7;border:1px solid var(--gold);padding:3px 10px;border-radius:2px;white-space:nowrap">+ expand</span>
+    </div>
+  </div>
+  <div class="scenario-sub" style="margin-bottom:16px;display:none" id="s6-sub">All changes show delta vs Scenario A in green/red. Day rates are inherited from §4 sliders but can be overridden per group here. <strong>Use Part-time % and Part-time days/wk sliders to model different launch-phase mixes.</strong> Example: Pre-School 40% PT on 3d/wk = realistic Q1 scenario at launch. Increasing full-week share over time shows maturation trajectory.</div>
   <div class="sec-body">
 
   <div class="sc-b-wrap">
@@ -870,7 +877,27 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
     </div>
   </div>
 
-  <!-- MONTHLY P&L -->
+    <!-- YEAR 1 MONTHLY P&L — NEW DESIGN -->
+  <div style="margin-bottom:40px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+      <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;margin:0">Year 1 — Month-by-Month P&amp;L</h3>
+      <div style="display:flex;gap:4px;margin-left:auto" id="y1-src-tabs">
+        <button onclick="setY1Src('A')" id="y1-src-a" class="ptab active">Scenario A</button>
+        <button onclick="setY1Src('B')" id="y1-src-b" class="ptab">Scenario B</button>
+      </div>
+    </div>
+    <p style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:16px">
+      Occupancy from §5 ramp · For Scenario B: price ramp + discounts from §6 · Staff &amp; fixed costs constant · Setup costs in Month 1 · Registration fees in Month 1
+    </p>
+    <div style="overflow-x:auto">
+      <table id="y1-pl-table" style="width:100%;border-collapse:collapse;font-size:12px;min-width:1100px">
+        <thead id="y1-pl-head"></thead>
+        <tbody id="y1-pl-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+<!-- MONTHLY P&L -->
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
     <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;margin:0" id="pl-title">Monthly P&amp;L — Stabilised (Year 2)</h3>
     <div style="display:flex;gap:4px" id="pl-year-tabs">
@@ -951,40 +978,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
   </div>
 
 
-  <!-- YEAR 1 MONTHLY P&L — SCENARIO A vs B -->
-  <div style="margin-top:36px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap">
-      <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;margin:0">Year 1 — Month-by-Month P&amp;L</h3>
-      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)">Scenario A vs Scenario B · side by side · uses §5 Ramp-Up Parameters + §6 price ramp &amp; discounts</div>
-    </div>
-    <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px">Each month: occupancy from §5 ramp → revenue scales proportionally. For Scenario B, price ramp also applies (different rate per period). Staff + fixed costs stay constant regardless of occupancy. Setup costs in Month 1 only.</p>
-    <div style="overflow-x:auto">
-      <table id="y1-monthly-table" style="font-size:11.5px;min-width:900px">
-        <thead>
-          <tr>
-            <th style="white-space:nowrap">Month</th>
-            <th style="white-space:nowrap">Occ %</th>
-            <th style="white-space:nowrap;background:var(--cream)">A Revenue</th>
-            <th style="white-space:nowrap;background:var(--cream)">A EBITDA</th>
-            <th style="white-space:nowrap;background:var(--cream)">A Net</th>
-            <th style="background:#f5f0e8;white-space:nowrap">B Day rate</th>
-            <th style="background:#f5f0e8;white-space:nowrap">B Revenue</th>
-            <th style="background:#f5f0e8;white-space:nowrap">B EBITDA</th>
-            <th style="background:#f5f0e8;white-space:nowrap">B Net</th>
-            <th style="white-space:nowrap">Δ Net (B−A)</th>
-          </tr>
-        </thead>
-        <tbody id="y1-monthly-body">
-          <!-- built by buildY1Monthly() -->
-        </tbody>
-        <tfoot id="y1-monthly-foot"></tfoot>
-      </table>
-    </div>
-    <div style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);margin-top:8px;line-height:1.7">
-      * EBITDA = Revenue − Direct staff − Variable costs − Fixed opex. Net = EBITDA × 75% (25% tax). Month 1 includes one-off setup costs. Registration fee revenue (if any) shown in Month 1. B Day rate = blended across ramp periods and pre-launch discount contracts.
-    </div>
-  </div>
-
+  
   <div class="note"><strong>Note on tax:</strong> Income tax estimated at 25% of operating profit (UK corporation tax). Depreciation not modelled. Setup costs (Y1 only) treated as exceptional operating expense. Source for cost structure: Kidz1 Business Plan v1 June 2025 — figures to be updated once IQ Nurseries lease and staffing contracts are finalised.</div>
 </div>
 </div>
@@ -2760,104 +2754,128 @@ function toggleSec(id){
   const sec=document.getElementById(id);
   if(!sec)return;
   sec.classList.toggle('open');
-  // Update arrow for s6 which uses its own arrow span
+  const isOpen=sec.classList.contains('open');
   const arr=document.getElementById(id+'-arrow');
-  if(arr)arr.textContent=sec.classList.contains('open')?'▲':'▼';
+  if(arr){
+    arr.textContent=arr.style.border?(isOpen?'\u2212 collapse':'+ expand'):(isOpen?'\u25b2':'\u25bc');
+  }
+  const sub=document.getElementById(id+'-sub');
+  if(sub) sub.style.display=isOpen?'block':'none';
 }
 
 
-// ── YEAR 1 MONTHLY P&L TABLE ──
+// ── YEAR 1 MONTHLY P&L — matches Stabilised P&L row structure, 12 months ──
+let y1Src='A'; // 'A' or 'B'
+function setY1Src(s){
+  y1Src=s;
+  ['y1-src-a','y1-src-b'].forEach(id=>{
+    const btn=document.getElementById(id);
+    if(btn) btn.classList.toggle('active',id===('y1-src-'+s.toLowerCase()));
+  });
+  buildY1Monthly();
+}
+
 function buildY1Monthly(){
-  const tb=document.getElementById('y1-monthly-body');
-  const ft=document.getElementById('y1-monthly-foot');
-  if(!tb||!ft)return;
+  const head=document.getElementById('y1-pl-head');
+  const tb=document.getElementById('y1-pl-body');
+  if(!tb||!head) return;
   const c=getCosts();
+  const isB=y1Src==='B';
   const fixedOpexMth=(c.rent+c.rates+c.svc+c.clean+c.heat+c.ins+c.mgmt+c.mgmtni+c.it+c.adv+c.prof+c.cont)/12;
   const setupY1=c.setup;
+  const regRevenue=isB?getRegFeeRevenue(B_CAPS).revenue:GROUPS.reduce((a,g)=>a+g.cap,0)*100;
 
-  function monthRev(mo,isB){
+  // Pre-compute per-month revenue, staff, variable costs
+  const months=[];
+  for(let mo=1;mo<=12;mo++){
     const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.93;
-    let rev=0;
+    let sessionRev=0, staffCost=0, varCost=0;
     GROUPS.forEach(g=>{
       const cap=isB?B_CAPS[g.id]:g.cap;
       const mix=isB?getScenarioMixAtMonth(g.id,mo):BASE_MIX[g.id];
       const dr=isB?mix.dayRate:DAY_RATES[g.id];
       const r=calcGroup({...g,cap},mix,dr,isB?G.r:DFE_RATES);
-      rev+=r.total*occ;
+      sessionRev+=r.total*occ;
+      const sn=Math.ceil(cap/STAFF_RATIOS[g.id]);
+      staffCost+=sn*c.staffsal*(1+c.staffni/100)/12;
+      const avgDays=mix.ptPct>0?(mix.ftPct/100*5+mix.ptPct/100*(mix.ptDays||3)):5;
+      varCost+=(c.food*avgDays*WEEKS_MTH+c.art)*(cap-1)*occ;
     });
     const ext=isB?G.ext*G.extfee*5*WEEKS_MTH:BASE_EARLY_USERS*BASE_EARLY_FEE*5*WEEKS_MTH;
     const lat=isB?G.late*G.latefee*5*WEEKS_MTH:BASE_LATE_USERS*BASE_LATE_FEE*5*WEEKS_MTH;
-    return rev+(ext+lat)*occ;
+    const earlyLate=(ext+lat)*occ;
+    const totalRev=sessionRev+earlyLate+(mo===1?regRevenue:0);
+    const merchantFee=totalRev*c.merch;
+    varCost+=merchantFee;
+    const grossProfit=totalRev-staffCost-varCost;
+    const fixedThisMo=fixedOpexMth+(mo===1?setupY1:0);
+    const ebitda=grossProfit-fixedThisMo;
+    const tax=Math.max(0,ebitda*0.25);
+    const net=ebitda-tax;
+    const bDR=isB?(GROUPS.reduce((a,g)=>a+getBlendedDayRate(g.id,mo,B_CAPS)*B_CAPS[g.id],0)/Math.max(1,Object.values(B_CAPS).reduce((a,v)=>a+v,0))):null;
+    months.push({mo,occ,totalRev,sessionRev,earlyLate,regRev:mo===1?regRevenue:0,staffCost,varCost:varCost-merchantFee,merchantFee,grossProfit,fixedOpexMth,setupThisMo:mo===1?setupY1:0,ebitda,tax,net,bDR});
   }
-  function monthStaff(isB){
-    return GROUPS.reduce((a,g)=>{
-      const cap=isB?B_CAPS[g.id]:g.cap;
-      const sn=Math.ceil(cap/STAFF_RATIOS[g.id]);
-      return a+sn*c.staffsal*(1+c.staffni/100)/12;
-    },0);
-  }
-  function monthVar(mo,isB,rev){
-    const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.93;
-    let v=GROUPS.reduce((a,g)=>{
-      const cap=isB?B_CAPS[g.id]:g.cap;
-      const mix=isB?getScenarioMixAtMonth(g.id,mo):BASE_MIX[g.id];
-      const avgDays=mix.ptPct>0?(mix.ftPct/100*5+mix.ptPct/100*(mix.ptDays||3)):5;
-      return a+(c.food*avgDays*WEEKS_MTH+c.art)*(cap-1)*occ;
-    },0);
-    return v+rev*c.merch;
-  }
-  const staffA=monthStaff(false), staffB=monthStaff(true);
-  const regB=getRegFeeRevenue(B_CAPS).revenue;
-  const regA=GROUPS.reduce((a,g)=>a+g.cap,0)*100;
-  const rows=[];
-  let tArev=0,tAnet=0,tBrev=0,tBnet=0;
-  for(let mo=1;mo<=12;mo++){
-    const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.93;
-    const pct=Math.round(occ*100);
-    const aRev=monthRev(mo,false);
-    let aEbitda=aRev-staffA-monthVar(mo,false,aRev)-fixedOpexMth;
-    if(mo===1)aEbitda+=regA-setupY1;
-    const aNet=aEbitda*0.75;
-    const bRev=monthRev(mo,true);
-    let bEbitda=bRev-staffB-monthVar(mo,true,bRev)-fixedOpexMth;
-    if(mo===1)bEbitda+=regB-setupY1;
-    const bNet=bEbitda*0.75;
-    const bDR=GROUPS.reduce((a,g)=>a+getBlendedDayRate(g.id,mo,B_CAPS)*B_CAPS[g.id],0)/
-              Math.max(1,Object.values(B_CAPS).reduce((a,v)=>a+v,0));
-    tArev+=aRev;tAnet+=aNet;tBrev+=bRev;tBnet+=bNet;
-    rows.push({mo,pct,aRev,aEbitda,aNet,bRev,bEbitda,bNet,delta:bNet-aNet,bDR,ramp:mo<=RAMP.length});
-  }
-  const CS="font-family:'DM Mono',monospace;text-align:right;padding:5px 9px;";
-  tb.innerHTML=rows.map(r=>{
-    const aC=r.aNet>=0?"var(--sage)":"var(--rust)";
-    const bC=r.bNet>=0?"var(--sage)":"var(--rust)";
-    const dC=r.delta>=0?"var(--sage)":"var(--rust)";
-    const bg=r.ramp?"background:#fefcf8;":"";
-    return `<tr style="${bg}">
-      <td style="${CS}font-weight:700">M${r.mo}${r.mo===1?" *":""}</td>
-      <td style="${CS}"><span style="font-size:9px;padding:2px 4px;border-radius:2px;background:${r.pct<70?"var(--rust-lt)":r.pct<90?"#fff3cd":"var(--sage-lt)"}">${r.pct}%</span></td>
-      <td style="${CS}background:var(--cream)">${fmt(r.aRev,true)}</td>
-      <td style="${CS}background:var(--cream);color:${r.aEbitda>=0?"var(--sage)":"var(--rust)"}">${fmt(r.aEbitda,true)}</td>
-      <td style="${CS}background:var(--cream);font-weight:700;color:${aC}">${fmt(r.aNet,true)}</td>
-      <td style="${CS}background:#f5f0e8;color:var(--gold-dk)">&#163;${r.bDR.toFixed(0)}</td>
-      <td style="${CS}background:#f5f0e8">${fmt(r.bRev,true)}</td>
-      <td style="${CS}background:#f5f0e8;color:${r.bEbitda>=0?"var(--sage)":"var(--rust)"}">${fmt(r.bEbitda,true)}</td>
-      <td style="${CS}background:#f5f0e8;font-weight:700;color:${bC}">${fmt(r.bNet,true)}</td>
-      <td style="${CS}font-weight:700;color:${dC}">${r.delta>=0?"+":""}${fmt(r.delta,true)}</td>
-    </tr>`;
-  }).join("");
-  const d=tBnet-tAnet;
-  ft.innerHTML=`<tr style="background:var(--ink);color:var(--paper)">
-    <td colspan="2" style="${CS}font-size:9px;text-transform:uppercase;letter-spacing:.08em">YEAR 1</td>
-    <td style="${CS}background:rgba(255,255,255,.08)">${fmt(tArev,true)}</td>
-    <td style="${CS}background:rgba(255,255,255,.08)">&#8212;</td>
-    <td style="${CS}background:rgba(255,255,255,.08);font-weight:700;color:var(--gold)">${fmt(tAnet,true)}</td>
-    <td style="${CS}background:rgba(255,255,255,.12)">&#8212;</td>
-    <td style="${CS}background:rgba(255,255,255,.12)">${fmt(tBrev,true)}</td>
-    <td style="${CS}background:rgba(255,255,255,.12)">&#8212;</td>
-    <td style="${CS}background:rgba(255,255,255,.12);font-weight:700;color:var(--gold)">${fmt(tBnet,true)}</td>
-    <td style="${CS}font-weight:700;color:${d>=0?"#7ecf9a":"#ff8080"}">${d>=0?"+":""}${fmt(d,true)}</td>
+
+  // Build header row: Item | M1 | M2 | ... | M12 | Year Total
+  const occRow=months.map(m=>`<span style="font-size:9px;padding:1px 4px;border-radius:2px;background:${m.occ<0.7?'var(--rust-lt)':m.occ<0.9?'#fff3cd':'var(--sage-lt)'}">${Math.round(m.occ*100)}%</span>`).join('</th><th style="text-align:center;padding:4px 6px">');
+  head.innerHTML=`<tr>
+    <th style="background:var(--ink);color:var(--paper);padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;min-width:180px">Item</th>
+    ${months.map(m=>`<th style="background:var(--ink);color:var(--paper);padding:7px 6px;text-align:right;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.06em;min-width:72px">M${m.mo}${m.mo===1?' *':''}</th>`).join('')}
+    <th style="background:var(--gold);color:var(--ink);padding:7px 8px;text-align:right;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.06em;min-width:80px">Year 1</th>
+  </tr>
+  <tr style="background:var(--cream)">
+    <td style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);padding:4px 12px;text-transform:uppercase;letter-spacing:.08em">Occupancy</td>
+    <th style="text-align:center;padding:4px 6px">${occRow}</th>
+    <td style="text-align:center;padding:4px 6px;font-family:'DM Mono',monospace;font-size:8px;color:var(--muted)">${(months.reduce((a,m)=>a+m.occ,0)/12*100).toFixed(0)}% avg</td>
   </tr>`;
+
+  // Helper to build a data row
+  const sumOf=key=>months.reduce((a,m)=>a+m[key],0);
+  function mkRow(label,key,cls='',isSub=false,colorFn=null){
+    const vals=months.map(m=>m[key]);
+    const total=sumOf(key);
+    const tdBase=`padding:${isSub?'4px 6px':'6px 6px'};text-align:right;font-family:'DM Mono',monospace;font-size:11px;`;
+    const cells=vals.map((v,i)=>{
+      const col=colorFn?colorFn(v):'';
+      return `<td class="${cls}" style="${tdBase}${col?'color:'+col:''}">${fmt(v,true)}</td>`;
+    }).join('');
+    const totCol=colorFn?colorFn(total):'';
+    return `<tr class="${cls}">
+      <td style="padding:${isSub?'4px 12px':'6px 12px'};font-size:${isSub?'11.5px':'12.5px'};${isSub?'color:var(--muted);padding-left:24px':''}">${isSub?'└ '+label:label}</td>
+      ${cells}
+      <td style="${tdBase}font-weight:700;${totCol?'color:'+totCol:''}">${fmt(total,true)}</td>
+    </tr>`;
+  }
+
+  const posNeg=v=>v>=0?'var(--sage)':'var(--rust)';
+  const negCol=()=>'var(--rust)';
+
+  // Rows matching Stabilised P&L structure
+  const rows=[
+    `<tr><td colspan="${months.length+2}" style="background:var(--cream);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:6px 12px">Revenue</td></tr>`,
+    mkRow('Session fees (groups)', 'sessionRev'),
+    mkRow('Early start / Late pick-up', 'earlyLate', '', true),
+    mkRow('Registration fees (Month 1)', 'regRev', '', true, v=>v>0?'var(--gold-dk)':'var(--muted)'),
+    mkRow('Total Revenue', 'totalRev', 'pl-row subtotal'),
+    `<tr><td colspan="${months.length+2}" style="background:var(--cream);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:6px 12px">Direct Costs</td></tr>`,
+    mkRow('Staff costs', 'staffCost', 'pl-row cost', false, negCol),
+    mkRow('Food & materials', 'varCost', 'pl-row cost', false, negCol),
+    mkRow('Merchant fees', 'merchantFee', 'pl-row cost', true, negCol),
+    mkRow('Gross Profit', 'grossProfit', 'pl-row subtotal', false, posNeg),
+    `<tr><td colspan="${months.length+2}" style="background:var(--cream);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:6px 12px">Fixed Opex</td></tr>`,
+    mkRow('Fixed operating costs', 'fixedOpexMth', 'pl-row cost', false, negCol),
+    mkRow('One-off setup (Month 1)', 'setupThisMo', 'pl-row cost', true, v=>v>0?'var(--rust)':'var(--muted)'),
+    mkRow('EBITDA', 'ebitda', 'pl-row subtotal', false, posNeg),
+    mkRow('Tax (25%)', 'tax', 'pl-row cost', true, negCol),
+    mkRow('Net Profit', 'net', 'pl-row profit', false, posNeg),
+  ];
+  tb.innerHTML=rows.join('');
+
+  // Add blended day rate row for B
+  if(isB){
+    const drRow=`<tr style="background:var(--iq-bg)"><td style="padding:4px 12px;font-size:11px;color:var(--gold-dk);font-family:'DM Mono',monospace;text-transform:uppercase;font-size:8px;letter-spacing:.06em">Blended day rate (B)</td>${months.map(m=>`<td style="text-align:right;padding:4px 6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold-dk)">&#163;${m.bDR.toFixed(0)}</td>`).join('')}<td style="text-align:right;padding:4px 8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)">blended</td></tr>`;
+    tb.innerHTML=drRow+tb.innerHTML;
+  }
 }
 
 // ── INIT ──
