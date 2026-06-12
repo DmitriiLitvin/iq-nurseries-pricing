@@ -146,6 +146,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 /* SCENARIOS */
 .scenario-badge{font-family:'DM Mono',monospace;font-size:9px;padding:4px 12px;border-radius:2px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:inline-block;margin-bottom:8px}
 .sc-a-badge{background:var(--ink);color:var(--gold)}
+.sec:not(.open) .scenario-badge{display:none}
 .sc-b-badge{background:var(--gold);color:var(--ink)}
 .scenario-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:4px}
 .scenario-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
@@ -331,7 +332,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §1 MARKET AVERAGES -->
 <div class="sec" id="s1">
   <div class="sec-lbl">Section 01</div>
-  <h2 class="sec-title" onclick="toggleSec('s1')">Market Averages — Ealing &amp; West London 2026</h2>
+  <h2 class="sec-title" onclick="toggleSec('s1')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">📊</span>Market Averages — Ealing &amp; West London 2026</span></h2>
   <div class="sec-body">
     <p class="sec-intro">Aggregated from Tier-1 nurseries in the W5/W3 catchment. Excludes Bumble Bees (different model), Maria Montessori and Melrose (term-time, short hours). Sources in §2.</p>
 
@@ -372,7 +373,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §2 BENCHMARKS -->
 <div class="sec" id="s2">
   <div class="sec-lbl">Section 02</div>
-  <h2 class="sec-title" onclick="toggleSec('s2')">Benchmarks by Data Type</h2>
+  <h2 class="sec-title" onclick="toggleSec('s2')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">🔍</span>Benchmarks by Data Type</span></h2>
   <div class="sec-body">
     <p class="sec-intro">Each block covers one pricing dimension. (est.) = not published online, estimated from market norms.</p>
 
@@ -464,7 +465,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §3 HOW WE BILL -->
 <div class="sec" id="s3">
   <div class="sec-lbl">Section 03</div>
-  <h2 class="sec-title" onclick="toggleSec('s3')">How Parents Pay — Billing Mechanics</h2>
+  <h2 class="sec-title" onclick="toggleSec('s3')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">💳</span>How Parents Pay — Billing Mechanics</span></h2>
   <div class="sec-body">
     <p class="sec-intro">One fixed monthly Direct Debit. Day rates are a pricing and benchmarking unit — not what appears on the invoice. Below is the full calculation mechanics including a worked example.</p>
 
@@ -563,7 +564,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §4 FEE SCHEDULE WITH SLIDERS -->
 <div class="sec" id="s4">
   <div class="sec-lbl">Section 04</div>
-  <h2 class="sec-title" onclick="toggleSec('s4')">IQ Nurseries — Fee Schedule by Age Group</h2>
+  <h2 class="sec-title" onclick="toggleSec('s4')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">💷</span>IQ Nurseries — Fee Schedule by Age Group</span></h2>
   <div class="sec-body">
     <p class="sec-intro">Adjust the day rate slider on each group. All derived values (hourly, monthly 5d, monthly 3d) update automatically. Benchmark values are shown for reference — recommended defaults are pre-set. <strong>Part-week example: £90/day × 3d × 4.25wks = £1,147/mth.</strong></p>
 
@@ -580,7 +581,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §5 SCENARIO A — BASE -->
 <div class="sec" id="s5">
   <div class="sec-lbl">Section 05</div>
-  <h2 class="sec-title" onclick="toggleSec('s5')">Revenue Scenarios</h2>
+  <h2 class="sec-title" onclick="toggleSec('s5')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">📈</span>Revenue Scenarios</span></h2>
   <div class="sec-body">
     <p class="sec-intro">Two scenarios based on the fee schedule above. Scenario A uses fixed market-average assumptions. Results update if you change the day rate sliders in §4.</p>
 
@@ -760,7 +761,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §7 ADD-ONS -->
 <div class="sec" id="s7">
   <div class="sec-lbl">Section 07</div>
-  <h2 class="sec-title" onclick="toggleSec('s7')">Add-On Revenue</h2>
+  <h2 class="sec-title" onclick="toggleSec('s7')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">➕</span>Add-On Revenue</span></h2>
   <div class="sec-body">
       <div class="tbw">
     <table>
@@ -793,7 +794,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §8 UNIT ECONOMICS & P&L -->
 <div class="sec" id="s8">
   <div class="sec-lbl">Section 08</div>
-  <h2 class="sec-title" onclick="toggleSec('s8')">Unit Economics &amp; P&amp;L</h2>
+  <h2 class="sec-title" onclick="toggleSec('s8')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">🧮</span>Unit Economics &amp; P&amp;L</span></h2>
   <div class="sec-body">
   
   <!-- BABY RETENTION INSIGHT -->
@@ -879,11 +880,18 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 
     <!-- YEAR 1 MONTHLY P&L — NEW DESIGN -->
   <div style="margin-bottom:40px">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
       <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;margin:0">Year 1 — Month-by-Month P&amp;L</h3>
       <div style="display:flex;gap:4px;margin-left:auto" id="y1-src-tabs">
         <button onclick="setY1Src('A')" id="y1-src-a" class="ptab active">Scenario A</button>
         <button onclick="setY1Src('B')" id="y1-src-b" class="ptab">Scenario B</button>
+      </div>
+      <div style="display:flex;gap:4px;margin-left:8px" id="y1-group-tabs">
+        <button onclick="setY1Group('all')" id="y1g-all" class="ptab active">All Groups</button>
+        <button onclick="setY1Group('A')" id="y1g-A" class="ptab">Babies</button>
+        <button onclick="setY1Group('B')" id="y1g-B" class="ptab">Baby/Toddler</button>
+        <button onclick="setY1Group('C')" id="y1g-C" class="ptab">Toddlers</button>
+        <button onclick="setY1Group('D')" id="y1g-D" class="ptab">Pre-School</button>
       </div>
     </div>
     <p style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:16px">
@@ -986,7 +994,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §9 LTV MODEL -->
 <div class="sec" id="s9">
   <div class="sec-lbl">Section 09</div>
-  <h2 class="sec-title" onclick="toggleSec('s9')">Cohort LTV — Which Children Are Most Valuable Over Time?</h2>
+  <h2 class="sec-title" onclick="toggleSec('s9')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">♾️</span>Cohort LTV — Which Children Are Most Valuable Over Time?</span></h2>
   <div class="sec-body">
     <p class="sec-intro">A baby enrolled at 6 months generates revenue across 4 rooms over 4+ years. This section models cumulative revenue per annual intake cohort by entry group — accounting for churn, room progression, and changing revenue per child as they age. Toggle retention assumptions and scenario to see how the picture shifts.</p>
 
@@ -1015,7 +1023,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §10 OPTIMISATION -->
 <div class="sec" id="s10">
   <div class="sec-lbl">Section 10</div>
-  <h2 class="sec-title" onclick="toggleSec('s10')">Portfolio Optimisation — What Mix of Children Should We Target?</h2>
+  <h2 class="sec-title" onclick="toggleSec('s10')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">⚖️</span>Portfolio Optimisation — What Mix of Children Should We Target?</span></h2>
   <div class="sec-body">
     <p class="sec-intro">This section answers a single question mathematically: <strong>given 121 fixed places, what combination of age groups generates the most value?</strong> We tested 62,732 combinations and ran sensitivity analysis across multiple scenarios. Below is the result — explained without jargon.</p>
 
@@ -1302,7 +1310,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
 <!-- §11 ROOM PLANNER -->
 <div class="sec" id="s11">
   <div class="sec-lbl">Section 11</div>
-  <h2 class="sec-title" onclick="toggleSec('s11')">Room Planner — Capacity by Physical Layout</h2>
+  <h2 class="sec-title" onclick="toggleSec('s11')"><span style="display:flex;align-items:center;gap:14px"><span style="font-size:22px;opacity:.65">🏛️</span>Room Planner — Capacity by Physical Layout</span></h2>
   <div class="sec-body">
     <p class="sec-intro">Each room has a fixed floor area. EYFS regulations set minimum space per child: <strong>3.5 sqm</strong> for Babies (under 2), <strong>2.5 sqm</strong> for Toddlers (2–3yr), <strong>2.3 sqm</strong> for Pre-School (3–5yr). Change which age group occupies each room — the model recalculates total capacity, revenue, costs, profit, LTV and Score in real time.</p>
 
@@ -2764,13 +2772,28 @@ function toggleSec(id){
 }
 
 
-// ── YEAR 1 MONTHLY P&L — matches Stabilised P&L row structure, 12 months ──
+// ── YEAR 1 MONTHLY P&L — full group breakdown, group filter, special contracts ──
 let y1Src='A'; // 'A' or 'B'
+let y1Group='all'; // 'all' | 'A' | 'B' | 'C' | 'D'
+
 function setY1Src(s){
   y1Src=s;
   ['y1-src-a','y1-src-b'].forEach(id=>{
     const btn=document.getElementById(id);
     if(btn) btn.classList.toggle('active',id===('y1-src-'+s.toLowerCase()));
+  });
+  buildY1Monthly();
+}
+function setY1Group(gid){
+  y1Group=gid;
+  const grpBtns=['all','A','B','C','D'];
+  grpBtns.forEach(id=>{
+    const btn=document.getElementById('y1g-'+id);
+    if(!btn)return;
+    const active=id===gid;
+    btn.style.cssText=active?
+      "font-family:'DM Mono',monospace;font-size:9px;padding:4px 10px;border:1px solid var(--gold);background:var(--gold);color:#fff;border-radius:2px;cursor:pointer":
+      "font-family:'DM Mono',monospace;font-size:9px;padding:4px 10px;border:1px solid var(--border);background:var(--cream);color:var(--muted);border-radius:2px;cursor:pointer";
   });
   buildY1Monthly();
 }
@@ -2781,101 +2804,203 @@ function buildY1Monthly(){
   if(!tb||!head) return;
   const c=getCosts();
   const isB=y1Src==='B';
-  const fixedOpexMth=(c.rent+c.rates+c.svc+c.clean+c.heat+c.ins+c.mgmt+c.mgmtni+c.it+c.adv+c.prof+c.cont)/12;
-  const setupY1=c.setup;
-  const regRevenue=isB?getRegFeeRevenue(B_CAPS).revenue:GROUPS.reduce((a,g)=>a+g.cap,0)*100;
+  const filteredGroups=y1Group==='all'?GROUPS:GROUPS.filter(g=>g.id===y1Group);
+  const totalCapAll=GROUPS.reduce((a,g)=>a+(isB?B_CAPS[g.id]:g.cap),0);
+  const fixedOpexMthFull=(c.rent+c.rates+c.svc+c.clean+c.heat+c.ins+c.mgmt+c.mgmtni+c.it+c.adv+c.prof+c.cont)/12;
+  const fixedShare=y1Group==='all'?1:filteredGroups.reduce((a,g)=>a+(isB?B_CAPS[g.id]:g.cap),0)/Math.max(1,totalCapAll);
+  const fixedOpexMth=fixedOpexMthFull*fixedShare;
+  const setupFull=c.setup;
+  const setupMth1=setupFull*fixedShare;
 
-  // Pre-compute per-month revenue, staff, variable costs
+  // Registration fees — Month 1 only
+  const regFeeInfo=getRegFeeRevenue(isB?B_CAPS:Object.fromEntries(GROUPS.map(g=>[g.id,g.cap])));
+  let regRevFull=isB?regFeeInfo.revenue:GROUPS.reduce((a,g)=>a+g.cap,0)*100;
+  // For group filter: allocate reg fees pro-rata by capacity
+  const regRevMth1=regRevFull*fixedShare;
+
+  // Per-month data
+  function calcMonthGroup(g, mo){
+    const cap=isB?B_CAPS[g.id]:g.cap;
+    const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.93;
+    const mix=isB?getScenarioMixAtMonth(g.id,mo):BASE_MIX[g.id];
+    const dr=isB?mix.dayRate:DAY_RATES[g.id];
+    const r=calcGroup({...g,cap},mix,dr,isB?G.r:DFE_RATES);
+    // Special contract distribution for Scenario B
+    let specialN=0, specialDR=null, rampDR=dr;
+    if(isB && DISCOUNTS.prelaunch.enabled && mo<=DISCOUNTS.prelaunch.holdUntilMonth){
+      const dist=distributeSpecialContracts(DISCOUNTS.prelaunch.totalContracts,B_CAPS);
+      specialN=dist[g.id]||0;
+      specialDR=DISCOUNTS.prelaunch.specialPrices[g.id];
+      // Get period ramp price
+      const periods=PRICE_RAMP.periods.slice().sort((a,b)=>a.fromMonth-b.fromMonth);
+      let rp=periods[0].prices[g.id];
+      for(const p of periods){if(mo>=p.fromMonth)rp=p.prices[g.id];}
+      rampDR=rp;
+    }
+    const sn=Math.ceil(cap/STAFF_RATIOS[g.id]);
+    const staffCostMth=sn*c.staffsal*(1+c.staffni/100)/12;
+    const avgDays=mix.ptPct>0?(mix.ftPct/100*5+mix.ptPct/100*(mix.ptDays||3)):5;
+    const varCost=(c.food*avgDays*WEEKS_MTH+c.art)*(cap-1)*occ;
+    return {
+      r, occ, cap, dr, rampDR, specialN, specialDR,
+      govt:r.govt*occ, priv:r.priv*occ, cons:(r.cons+r.enrich)*occ,
+      total:r.total*occ, staffCostMth, varCost, merchantFee:r.total*occ*c.merch,
+      nFT:r.nFT, nPT:r.nPT, nFO:r.nFO,
+      govtFiltered:r.govt*occ, privFiltered:r.priv*occ
+    };
+  }
+
   const months=[];
   for(let mo=1;mo<=12;mo++){
     const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.93;
-    let sessionRev=0, staffCost=0, varCost=0;
-    GROUPS.forEach(g=>{
-      const cap=isB?B_CAPS[g.id]:g.cap;
-      const mix=isB?getScenarioMixAtMonth(g.id,mo):BASE_MIX[g.id];
-      const dr=isB?mix.dayRate:DAY_RATES[g.id];
-      const r=calcGroup({...g,cap},mix,dr,isB?G.r:DFE_RATES);
-      sessionRev+=r.total*occ;
-      const sn=Math.ceil(cap/STAFF_RATIOS[g.id]);
-      staffCost+=sn*c.staffsal*(1+c.staffni/100)/12;
-      const avgDays=mix.ptPct>0?(mix.ftPct/100*5+mix.ptPct/100*(mix.ptDays||3)):5;
-      varCost+=(c.food*avgDays*WEEKS_MTH+c.art)*(cap-1)*occ;
+    let totalRev=0, totalGovt=0, totalPriv=0, totalCons=0;
+    let totalStaff=0, totalVar=0, totalMerch=0;
+    const byGroup={};
+    filteredGroups.forEach(g=>{
+      const gd=calcMonthGroup(g,mo);
+      byGroup[g.id]=gd;
+      totalGovt+=gd.govt; totalPriv+=gd.priv; totalCons+=gd.cons;
+      totalRev+=gd.total; totalStaff+=gd.staffCostMth; totalVar+=gd.varCost;
+      totalMerch+=gd.merchantFee;
     });
-    const ext=isB?G.ext*G.extfee*5*WEEKS_MTH:BASE_EARLY_USERS*BASE_EARLY_FEE*5*WEEKS_MTH;
-    const lat=isB?G.late*G.latefee*5*WEEKS_MTH:BASE_LATE_USERS*BASE_LATE_FEE*5*WEEKS_MTH;
-    const earlyLate=(ext+lat)*occ;
-    const totalRev=sessionRev+earlyLate+(mo===1?regRevenue:0);
-    const merchantFee=totalRev*c.merch;
-    varCost+=merchantFee;
-    const grossProfit=totalRev-staffCost-varCost;
-    const fixedThisMo=fixedOpexMth+(mo===1?setupY1:0);
+    // Early/late — proportional to group filter
+    const extBase=isB?G.ext*G.extfee*5*WEEKS_MTH:BASE_EARLY_USERS*BASE_EARLY_FEE*5*WEEKS_MTH;
+    const latBase=isB?G.late*G.latefee*5*WEEKS_MTH:BASE_LATE_USERS*BASE_LATE_FEE*5*WEEKS_MTH;
+    const earlyLate=(extBase+latBase)*occ*fixedShare;
+    const regThisMo=mo===1?regRevMth1:0;
+    const sessionRev=totalRev;
+    const totalRevAll=sessionRev+earlyLate+regThisMo;
+    totalMerch=totalRevAll*c.merch;  // recalc on full revenue
+    const grossProfit=totalRevAll-totalStaff-totalVar-totalMerch;
+    const fixedThisMo=fixedOpexMth+(mo===1?setupMth1:0);
     const ebitda=grossProfit-fixedThisMo;
     const tax=Math.max(0,ebitda*0.25);
     const net=ebitda-tax;
-    const bDR=isB?(GROUPS.reduce((a,g)=>a+getBlendedDayRate(g.id,mo,B_CAPS)*B_CAPS[g.id],0)/Math.max(1,Object.values(B_CAPS).reduce((a,v)=>a+v,0))):null;
-    months.push({mo,occ,totalRev,sessionRev,earlyLate,regRev:mo===1?regRevenue:0,staffCost,varCost:varCost-merchantFee,merchantFee,grossProfit,fixedOpexMth,setupThisMo:mo===1?setupY1:0,ebitda,tax,net,bDR});
+    months.push({mo,occ,totalRev:totalRevAll,sessionRev,govtTotal:totalGovt,privTotal:totalPriv,consTotal:totalCons,earlyLate,regThisMo,totalStaff,totalVar,totalMerch,grossProfit,fixedOpexMth,setupThisMo:mo===1?setupMth1:0,ebitda,tax,net,byGroup});
   }
 
-  // Build header row: Item | M1 | M2 | ... | M12 | Year Total
-  const occRow=months.map(m=>`<span style="font-size:9px;padding:1px 4px;border-radius:2px;background:${m.occ<0.7?'var(--rust-lt)':m.occ<0.9?'#fff3cd':'var(--sage-lt)'}">${Math.round(m.occ*100)}%</span>`).join('</th><th style="text-align:center;padding:4px 6px">');
+  // Build column headers
+  const thStyle=`background:var(--ink);color:var(--paper);padding:6px 5px;text-align:right;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.05em;min-width:68px`;
   head.innerHTML=`<tr>
-    <th style="background:var(--ink);color:var(--paper);padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;min-width:180px">Item</th>
-    ${months.map(m=>`<th style="background:var(--ink);color:var(--paper);padding:7px 6px;text-align:right;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.06em;min-width:72px">M${m.mo}${m.mo===1?' *':''}</th>`).join('')}
-    <th style="background:var(--gold);color:var(--ink);padding:7px 8px;text-align:right;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.06em;min-width:80px">Year 1</th>
+    <th style="${thStyle.replace('text-align:right','text-align:left')};min-width:200px">Item</th>
+    ${months.map(m=>`<th style="${thStyle}">M${m.mo}${m.mo===1?'*':''}</th>`).join('')}
+    <th style="${thStyle.replace('background:var(--ink)','background:var(--gold)').replace('color:var(--paper)','color:var(--ink)')};min-width:80px">Year 1</th>
   </tr>
   <tr style="background:var(--cream)">
     <td style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);padding:4px 12px;text-transform:uppercase;letter-spacing:.08em">Occupancy</td>
-    <th style="text-align:center;padding:4px 6px">${occRow}</th>
-    <td style="text-align:center;padding:4px 6px;font-family:'DM Mono',monospace;font-size:8px;color:var(--muted)">${(months.reduce((a,m)=>a+m.occ,0)/12*100).toFixed(0)}% avg</td>
+    ${months.map(m=>`<td style="text-align:center;padding:3px 4px"><span style="font-size:9px;padding:2px 4px;border-radius:2px;background:${m.occ<0.7?'var(--rust-lt)':m.occ<0.9?'#fff3cd':'var(--sage-lt)'}">${Math.round(m.occ*100)}%</span></td>`).join('')}
+    <td style="text-align:right;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);padding:3px 8px">${(months.reduce((a,m)=>a+m.occ,0)/12*100).toFixed(0)}% avg</td>
   </tr>`;
 
-  // Helper to build a data row
-  const sumOf=key=>months.reduce((a,m)=>a+m[key],0);
-  function mkRow(label,key,cls='',isSub=false,colorFn=null){
-    const vals=months.map(m=>m[key]);
-    const total=sumOf(key);
-    const tdBase=`padding:${isSub?'4px 6px':'6px 6px'};text-align:right;font-family:'DM Mono',monospace;font-size:11px;`;
-    const cells=vals.map((v,i)=>{
-      const col=colorFn?colorFn(v):'';
-      return `<td class="${cls}" style="${tdBase}${col?'color:'+col:''}">${fmt(v,true)}</td>`;
-    }).join('');
-    const totCol=colorFn?colorFn(total):'';
+  // Blended day rate row for Scenario B
+  const drRow=isB?`<tr style="background:var(--iq-bg)">
+    <td style="padding:3px 12px;font-family:'DM Mono',monospace;font-size:8px;color:var(--gold-dk);text-transform:uppercase;letter-spacing:.06em">${y1Group==='all'?'Blended day rate (all groups)':'Day rate — '+filteredGroups[0].label+(filteredGroups[0]&&DISCOUNTS.prelaunch.enabled?' incl. special contracts':'')}</td>
+    ${months.map(m=>{
+      if(y1Group==='all'){
+        const allCaps=isB?B_CAPS:Object.fromEntries(GROUPS.map(g=>[g.id,g.cap]));
+        const totalCap=Object.values(allCaps).reduce((a,v)=>a+v,0);
+        const blended=GROUPS.reduce((a,g)=>a+getBlendedDayRate(g.id,m.mo,B_CAPS)*B_CAPS[g.id],0)/Math.max(1,totalCap);
+        return `<td style="text-align:right;padding:3px 5px;font-family:'DM Mono',monospace;font-size:10px;color:var(--gold-dk)">&#163;${blended.toFixed(0)}</td>`;
+      } else {
+        const g=filteredGroups[0];
+        const blend=getBlendedDayRate(g.id,m.mo,B_CAPS);
+        const dist=DISCOUNTS.prelaunch.enabled?distributeSpecialContracts(DISCOUNTS.prelaunch.totalContracts,B_CAPS):null;
+        const nSpec=dist?dist[g.id]:0;
+        const rampOnly=getBlendedDayRate(g.id,m.mo,{...B_CAPS,[g.id]:B_CAPS[g.id]});
+        const tooltip=nSpec>0&&m.mo<=DISCOUNTS.prelaunch.holdUntilMonth?` (${nSpec} @ &#163;${DISCOUNTS.prelaunch.specialPrices[g.id]} + ${B_CAPS[g.id]-nSpec} @ &#163;${getBlendedDayRate(g.id,m.mo,B_CAPS).toFixed(0)})`:''
+        return `<td style="text-align:right;padding:3px 5px;font-family:'DM Mono',monospace;font-size:10px;color:var(--gold-dk)">&#163;${blend.toFixed(0)}</td>`;
+      }
+    }).join('')}
+    <td style="text-align:right;padding:3px 8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)">blended</td>
+  </tr>`:'';
+
+  // Helper for section header row
+  const sHdr=(label)=>`<tr><td colspan="${months.length+2}" style="background:var(--cream);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:5px 12px">${label}</td></tr>`;
+
+  // Helper for data rows
+  const sum=key=>months.reduce((a,m)=>a+m[key],0);
+  const tdS=`padding:5px 5px;text-align:right;font-family:'DM Mono',monospace;font-size:11px;border-bottom:1px solid var(--border)`;
+  function dataRow(label,vals,totVal,cls='',color=null,indent=false){
+    const isProfit=cls.includes('profit')||cls.includes('subtotal');
+    const bg=cls.includes('cost')?'background:var(--ev);':'';
+    const bg2=isProfit?'background:var(--cream);font-weight:600;':'';
+    const fw=isProfit?'font-weight:600;':'';
+    const pad=indent?'padding-left:22px;':'';
+    const labelCls=indent?'color:var(--muted);font-size:11.5px':'font-size:12.5px';
     return `<tr class="${cls}">
-      <td style="padding:${isSub?'4px 12px':'6px 12px'};font-size:${isSub?'11.5px':'12.5px'};${isSub?'color:var(--muted);padding-left:24px':''}">${isSub?'└ '+label:label}</td>
-      ${cells}
-      <td style="${tdBase}font-weight:700;${totCol?'color:'+totCol:''}">${fmt(total,true)}</td>
+      <td style="padding:${indent?'5px 12px 5px 24px':'6px 12px'};${labelCls};${bg}${bg2}">
+        ${indent?'<span style="color:var(--muted);margin-right:4px">└</span>':''}${label}
+      </td>
+      ${vals.map(v=>{
+        const col=color?color(v):'inherit';
+        return `<td style="${tdS};${bg}${bg2}${col!=='inherit'?'color:'+col+';':''}${fw}">${fmt(v,true)}</td>`;
+      }).join('')}
+      <td style="${tdS};${bg2}${color?'color:'+color(totVal)+';':''}font-weight:700">${fmt(totVal,true)}</td>
     </tr>`;
   }
-
   const posNeg=v=>v>=0?'var(--sage)':'var(--rust)';
-  const negCol=()=>'var(--rust)';
+  const neg=()=>'var(--rust)';
 
-  // Rows matching Stabilised P&L structure
-  const rows=[
-    `<tr><td colspan="${months.length+2}" style="background:var(--cream);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:6px 12px">Revenue</td></tr>`,
-    mkRow('Session fees (groups)', 'sessionRev'),
-    mkRow('Early start / Late pick-up', 'earlyLate', '', true),
-    mkRow('Registration fees (Month 1)', 'regRev', '', true, v=>v>0?'var(--gold-dk)':'var(--muted)'),
-    mkRow('Total Revenue', 'totalRev', 'pl-row subtotal'),
-    `<tr><td colspan="${months.length+2}" style="background:var(--cream);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:6px 12px">Direct Costs</td></tr>`,
-    mkRow('Staff costs', 'staffCost', 'pl-row cost', false, negCol),
-    mkRow('Food & materials', 'varCost', 'pl-row cost', false, negCol),
-    mkRow('Merchant fees', 'merchantFee', 'pl-row cost', true, negCol),
-    mkRow('Gross Profit', 'grossProfit', 'pl-row subtotal', false, posNeg),
-    `<tr><td colspan="${months.length+2}" style="background:var(--cream);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:6px 12px">Fixed Opex</td></tr>`,
-    mkRow('Fixed operating costs', 'fixedOpexMth', 'pl-row cost', false, negCol),
-    mkRow('One-off setup (Month 1)', 'setupThisMo', 'pl-row cost', true, v=>v>0?'var(--rust)':'var(--muted)'),
-    mkRow('EBITDA', 'ebitda', 'pl-row subtotal', false, posNeg),
-    mkRow('Tax (25%)', 'tax', 'pl-row cost', true, negCol),
-    mkRow('Net Profit', 'net', 'pl-row profit', false, posNeg),
-  ];
-  tb.innerHTML=rows.join('');
+  // Session fee sub-rows by group
+  const groupSubRows=filteredGroups.map(g=>{
+    const gVals=months.map(m=>m.byGroup[g.id]?.total||0);
+    const gTot=gVals.reduce((a,v)=>a+v,0);
+    const govtVals=months.map(m=>m.byGroup[g.id]?.govt||0);
+    const privVals=months.map(m=>m.byGroup[g.id]?.priv||0);
+    const govtTot=govtVals.reduce((a,v)=>a+v,0);
+    const privTot=privVals.reduce((a,v)=>a+v,0);
+    const capStr=isB?B_CAPS[g.id]:g.cap;
+    // Day rate note for B
+    const drNote=isB?` · £${getBlendedDayRate(g.id,1,B_CAPS).toFixed(0)}→£${getBlendedDayRate(g.id,12,B_CAPS).toFixed(0)}/day`:'';
+    const specialNote=isB&&DISCOUNTS.prelaunch.enabled?` · ${distributeSpecialContracts(DISCOUNTS.prelaunch.totalContracts,B_CAPS)[g.id]||0} special contracts`:'';
+    return `<tr class="pl-row" style="background:var(--ev)">
+      <td style="padding:4px 12px 4px 20px;font-size:11.5px;color:var(--muted)">
+        <span style="color:var(--muted);margin-right:4px">└</span>
+        <strong style="color:var(--ink)">${g.label}</strong>
+        <span style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);margin-left:6px">${capStr} places${drNote}${specialNote}</span>
+      </td>
+      ${gVals.map(v=>`<td style="${tdS};background:var(--ev)">${fmt(v,true)}</td>`).join('')}
+      <td style="${tdS};font-weight:700">${fmt(gTot,true)}</td>
+    </tr>
+    <tr style="background:#fafaf5">
+      <td style="padding:3px 12px 3px 32px;font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted)">└ DfE (govt)</td>
+      ${govtVals.map(v=>`<td style="${tdS};font-size:9.5px;color:#1565C0;background:#fafaf5">${fmt(v,true)}</td>`).join('')}
+      <td style="${tdS};font-size:9.5px;color:#1565C0;font-weight:600">${fmt(govtTot,true)}</td>
+    </tr>
+    <tr style="background:#fafaf5">
+      <td style="padding:3px 12px 3px 32px;font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted)">└ Private fees</td>
+      ${privVals.map(v=>`<td style="${tdS};font-size:9.5px;color:var(--sage);background:#fafaf5">${fmt(v,true)}</td>`).join('')}
+      <td style="${tdS};font-size:9.5px;color:var(--sage);font-weight:600">${fmt(privTot,true)}</td>
+    </tr>`;
+  }).join('');
 
-  // Add blended day rate row for B
-  if(isB){
-    const drRow=`<tr style="background:var(--iq-bg)"><td style="padding:4px 12px;font-size:11px;color:var(--gold-dk);font-family:'DM Mono',monospace;text-transform:uppercase;font-size:8px;letter-spacing:.06em">Blended day rate (B)</td>${months.map(m=>`<td style="text-align:right;padding:4px 6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold-dk)">&#163;${m.bDR.toFixed(0)}</td>`).join('')}<td style="text-align:right;padding:4px 8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)">blended</td></tr>`;
-    tb.innerHTML=drRow+tb.innerHTML;
-  }
+  tb.innerHTML = drRow +
+    sHdr('Revenue') +
+    `<tr class="pl-row subtotal">
+      <td style="padding:6px 12px;font-size:12.5px;font-weight:600">Session fees (${y1Group==='all'?'all groups':filteredGroups[0].label})</td>
+      ${months.map(m=>`<td style="${tdS};background:var(--cream);font-weight:600">${fmt(m.sessionRev,true)}</td>`).join('')}
+      <td style="${tdS};background:var(--cream);font-weight:700">${fmt(sum('sessionRev'),true)}</td>
+    </tr>` +
+    groupSubRows +
+    dataRow('Early start + Late pick-up', months.map(m=>m.earlyLate), sum('earlyLate'), '', null, true) +
+    dataRow('Registration fees (Month 1 only)', months.map(m=>m.regThisMo), sum('regThisMo'), '', v=>v>0?'var(--gold-dk)':'var(--muted)', true) +
+    dataRow('Total Revenue', months.map(m=>m.totalRev), sum('totalRev'), 'pl-row subtotal') +
+    sHdr('Direct Costs') +
+    dataRow('Nursery staff (salaries + NI/pension)', months.map(m=>-m.totalStaff), -sum('totalStaff'), 'pl-row cost', neg) +
+    dataRow('Food & art materials', months.map(m=>-m.totalVar), -sum('totalVar'), 'pl-row cost', neg) +
+    dataRow('Merchant / payment fees', months.map(m=>-m.totalMerch), -sum('totalMerch'), 'pl-row cost', neg, true) +
+    dataRow('Total Direct Costs', months.map(m=>-(m.totalStaff+m.totalVar+m.totalMerch)), -(sum('totalStaff')+sum('totalVar')+sum('totalMerch')), 'pl-row subtotal', neg) +
+    dataRow('Gross Profit', months.map(m=>m.grossProfit), sum('grossProfit'), 'pl-row subtotal', posNeg) +
+    sHdr('Fixed Opex') +
+    dataRow('Fixed operating costs', months.map(m=>-m.fixedOpexMth), -sum('fixedOpexMth'), 'pl-row cost', neg) +
+    dataRow('One-off setup costs (Month 1)', months.map(m=>-m.setupThisMo), -sum('setupThisMo'), 'pl-row cost', neg, true) +
+    dataRow('EBITDA', months.map(m=>m.ebitda), sum('ebitda'), 'pl-row subtotal', posNeg) +
+    dataRow('Tax (25% of profit)', months.map(m=>-m.tax), -sum('tax'), '', neg, true) +
+    `<tr class="pl-row ${sum('net')>=0?'profit':'loss'}">
+      <td style="padding:7px 12px;font-size:13px;font-weight:700">Net Profit / Loss</td>
+      ${months.map(m=>`<td style="${tdS};font-weight:700;color:${posNeg(m.net)}">${fmt(m.net,true)}</td>`).join('')}
+      <td style="${tdS};font-weight:700;font-size:13px;color:${posNeg(sum('net'))}">${fmt(sum('net'),true)}</td>
+    </tr>`;
 }
 
 // ── INIT ──
