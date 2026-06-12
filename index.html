@@ -1746,7 +1746,7 @@ function updateBaseScenario(){
   const rampLen=RAMP.length;
   const rampSum=RAMP.reduce((a,p)=>a+totAll*p/100,0);
   const h2Months=Math.max(0,12-rampLen);
-  const y1=rampSum+totAll*0.93*h2Months;
+  const y1=rampSum+totAll*0.95*h2Months;
   const y2=totAll*0.95*12;
   document.getElementById('b-h1').textContent=fmt(rampSum/Math.max(1,rampLen),true);
   document.getElementById('b-y1').textContent=fmt(y1,true);
@@ -1821,11 +1821,10 @@ function buildScenPanels(){
       <div class="lgp sub" id="lgp-${g.id}-rate">
         <div class="lgp-head" onclick="document.getElementById('lgp-${g.id}-rate').classList.toggle('open')">
           <span class="lgp-name">Day Rate &amp; Price Ramp</span>
-          <span class="lgp-badge ${g.bcls}">£${s.dayRate}</span></div>
+          <span class="lgp-badge ${g.bcls}" id="lgp-rate-badge-${g.id}">ramp</span></div>
         <div class="lgp-body" onclick="event.stopPropagation()">
-          <div class="cf"><label>Day rate £/day (steady-state) <span id="sv-dr-${g.id}">${s.dayRate}</span></label><input type="range" min="${g.minRate}" max="${g.maxRate}" step="1" value="${s.dayRate}" oninput="S['${g.id}'].dayRate=+this.value;document.getElementById('sv-dr-${g.id}').textContent=this.value;updateScenario()"></div>
-          <div style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);margin:6px 0 8px;line-height:1.6">
-            <strong style="color:var(--gold-dk)">Price Ramp:</strong> set launch-phase pricing that increases over time. The "Snapshot at month" selector in the toolbar shows the blended rate at that point.
+          <div style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);margin:0 0 10px;line-height:1.8;background:var(--cream);padding:8px 10px;border-radius:2px">
+            Задайте ставки по периодам ниже. Итоговая <strong style="color:var(--gold-dk)">blended rate</strong> рассчитывается автоматически — как взвешенное среднее между специальными контрактами (§6 Discounts) и рамп-ценой. Бегунок "steady-state" убран — он не влиял на расчёты при заданном рампе.
           </div>
           <div id="ramp-rows-${g.id}"></div>
         </div>
@@ -1877,6 +1876,13 @@ function buildRampRows(gid){
   const wrap=document.getElementById('ramp-rows-'+gid);
   if(!wrap)return;
   const periods=PRICE_RAMP.periods;
+  // Update badge to show price range
+  const badge=document.getElementById('lgp-rate-badge-'+gid);
+  if(badge&&periods.length>0){
+    const first=periods[0].prices[gid];
+    const last=periods[periods.length-1].prices[gid];
+    badge.textContent=first===last?'£'+first:'£'+first+'→£'+last;
+  }
   wrap.innerHTML=`
     <table style="width:100%;border-collapse:collapse;margin-bottom:8px">
       <thead><tr style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);text-transform:uppercase;text-align:left">
@@ -2041,10 +2047,10 @@ function updateScenario(){
   const totKids=Object.values(B_CAPS).reduce((a,v)=>a+v,0);
 
   const occNote=document.getElementById('sc-occ-note');
-  if(occNote) occNote.textContent=`Snapshot at month ${scViewMonth}: ${Math.round(snapOcc*100)}% occupancy${scViewMonth<=RAMP.length?' (ramp period)':' (stabilised)'}. Figures show revenue at this occupancy level. Δ vs Scenario A uses full-capacity baseline.`;
+  if(occNote) occNote.textContent='';
 
   document.getElementById('sc-total').textContent=fmt(totAll*m,true);
-  document.getElementById('sc-ts').textContent=`at ${Math.round(snapOcc*100)}% occ`;
+  document.getElementById('sc-ts').textContent='monthly';
   document.getElementById('sc-govt').textContent=fmt(totG*snapOcc*m,true);
   document.getElementById('sc-gs').textContent=pctStr(totG/Math.max(1,totAllFull)*100)+' of total';
   document.getElementById('sc-priv').textContent=fmt((totP+extMthCurr+lateMthCurr)*snapOcc*m,true);
@@ -2287,10 +2293,10 @@ function updatePL(){
     } else {
       // Scenario A: just use occupancy ramp average
       const avgOcc=RAMP.reduce((a,p)=>a+p,0)/RAMP.length/100;
-      const h2Occ=0.93;
+      const h2Occ=0.95;
       const rampMos=RAMP.length;
       plRevScale=(avgOcc*rampMos+h2Occ*(12-rampMos))/12;
-      plY1Detail=`Year 1 avg (Scenario A): ramp ${rampMos}mo avg ${(avgOcc*100).toFixed(0)}% + H2 93%. Scale: ${(plRevScale*100).toFixed(0)}%.`;
+      plY1Detail='';
     }
     // Scale unit revenue — staff/fixed costs stay, variable scales
     units.forEach(u=>{
@@ -2306,7 +2312,7 @@ function updatePL(){
 
   // Show Y1 detail note in group label if in Y1 mode
   const glbl=document.getElementById('pl-group-lbl');
-  if(plY1Detail && glbl) glbl.textContent=plY1Detail;
+  if(glbl && y1Group==='all') glbl.textContent='Showing all groups combined · fixed costs allocated pro-rata by places';
 
   // ── UNIT CARDS ──
   const maxRev=Math.max(...units.map(u=>u.revPerPlace));
@@ -2492,7 +2498,7 @@ function updatePL(){
 
   // 3-year projections
   const rampAvgPct=RAMP.reduce((a,p)=>a+p,0)/Math.max(1,RAMP.length)/100;
-  const h2Pct=0.93; // H2 stabilised assumption
+  const h2Pct=0.95;
   const y1Rev=totalRevMth*(rampAvgPct*RAMP.length+h2Pct*(12-RAMP.length))/12*12; // weighted Y1
   const y2Rev=totalRevMth*12*0.95;
   const y3Rev=totalRevMth*12*0.95*1.03;
@@ -2821,7 +2827,7 @@ function buildY1Monthly(){
   // Per-month data
   function calcMonthGroup(g, mo){
     const cap=isB?B_CAPS[g.id]:g.cap;
-    const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.93;
+    const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.95;
     const mix=isB?getScenarioMixAtMonth(g.id,mo):BASE_MIX[g.id];
     const dr=isB?mix.dayRate:DAY_RATES[g.id];
     const r=calcGroup({...g,cap},mix,dr,isB?G.r:DFE_RATES);
@@ -2852,7 +2858,7 @@ function buildY1Monthly(){
 
   const months=[];
   for(let mo=1;mo<=12;mo++){
-    const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.93;
+    const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.95;
     let totalRev=0, totalGovt=0, totalPriv=0, totalCons=0;
     let totalStaff=0, totalVar=0, totalMerch=0;
     const byGroup={};
