@@ -930,7 +930,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
       Occupancy from §5 ramp · For Scenario B: price ramp + discounts from §6 · Staff &amp; fixed costs constant · Setup costs in Month 1 · Registration fees in Month 1
     </p>
     <div style="overflow-x:auto">
-      <table id="y1-pl-table" style="width:100%;border-collapse:collapse;font-size:12px;min-width:1100px">
+      <table id="y1-pl-table" style="width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed">
         <thead id="y1-pl-head"></thead>
         <tbody id="y1-pl-body"></tbody>
       </table>
@@ -2968,15 +2968,15 @@ function buildY1Monthly(){
   }
 
   // Build column headers
-  const thStyle=`background:var(--ink);color:var(--paper);padding:4px 3px;text-align:right;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:.03em;min-width:58px`;
-  const thPreStyle=`background:#3a2a1a;color:#c8a96a;padding:4px 3px;text-align:right;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:.03em;min-width:50px`;
+  const thStyle=`background:var(--ink);color:var(--paper);padding:4px 2px;text-align:right;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:.02em;width:5.5%`;
+  const thPreStyle=`background:#3a2a1a;color:#c8a96a;padding:4px 2px;text-align:right;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:.02em;width:4%`;
   const allCols=[...preMonths,...months];
   const totalCols=allCols.length;
   head.innerHTML=`<tr>
-    <th style="${thStyle.replace('text-align:right','text-align:left')};min-width:150px">Item</th>
+    <th style="${thStyle.replace('text-align:right','text-align:left').replace('width:5.5%','width:18%')}">Item</th>
     ${preMonths.map(m=>`<th style="${thPreStyle}" title="Pre-opening: no revenue">${m.label}<br><span style="font-size:7px;opacity:.7">pre-open</span></th>`).join('')}
     ${months.map(m=>`<th style="${thStyle}">M${m.mo}${m.mo===1?'*':''}</th>`).join('')}
-    <th style="${thStyle.replace('background:var(--ink)','background:var(--gold)').replace('color:var(--paper)','color:var(--ink)')};min-width:68px">Total</th>
+    <th style="${thStyle.replace('background:var(--ink)','background:var(--gold)').replace('color:var(--paper)','color:var(--ink)')};width:6%">Total</th>
   </tr>
   <tr style="background:var(--cream)">
     <td style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);padding:4px 12px;text-transform:uppercase;letter-spacing:.08em">Occupancy</td>
@@ -3012,7 +3012,7 @@ function buildY1Monthly(){
 
   // Helper for data rows
   const sum=key=>months.reduce((a,m)=>a+m[key],0);
-  const tdS=`padding:4px 3px;text-align:right;font-family:'DM Mono',monospace;font-size:10px;border-bottom:1px solid var(--border)`;
+  const tdS=`padding:4px 2px;text-align:right;font-family:'DM Mono',monospace;font-size:10px;border-bottom:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap`;
   function dataRow(label,vals,totVal,cls='',color=null,indent=false,preVals=[]){
     const isProfit=cls.includes('profit')||cls.includes('subtotal');
     const bg=cls.includes('cost')?'background:var(--ev);':'';
@@ -3021,7 +3021,7 @@ function buildY1Monthly(){
     const pad=indent?'padding-left:22px;':'';
     const labelCls=indent?'color:var(--muted);font-size:10px':'font-size:11px';
     return `<tr class="${cls}">
-      <td style="padding:${indent?'3px 8px 3px 18px':'5px 10px'};${labelCls};${bg}${bg2}">
+      <td style="padding:${indent?'3px 6px 3px 14px':'5px 8px'};${labelCls};${bg}${bg2};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
         ${indent?'<span style="color:var(--muted);margin-right:4px">└</span>':''}${label}
       </td>
       ${vals.map(v=>{
