@@ -821,7 +821,25 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
       <!-- Fixed costs col 1 -->
       <div>
         <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Fixed Costs (£/year)</div>
-        <div class="pe-field"><label>Rent <span id="pv-rent">240,000</span></label><input type="range" id="p-rent" min="100000" max="400000" step="5000" value="240000" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Rent (full rate £/yr) <span id="pv-rent">250,000</span></label><input type="range" id="p-rent" min="0" max="350000" step="5000" value="250000" oninput="updatePL()"></div>
+        <div style="margin:-4px 0 10px;padding:8px;background:var(--cream);border-radius:3px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)">
+          <div style="color:var(--gold-dk);font-weight:600;margin-bottom:6px">RENT CONCESSION SCHEDULE</div>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+            <label style="flex:1">Rent-free months (from May 2026)</label>
+            <span id="pv-rent-free" style="color:var(--ink);font-weight:600">12</span>
+            <input type="range" id="p-rent-free" min="0" max="24" step="1" value="12" style="width:80px" oninput="document.getElementById('pv-rent-free').textContent=this.value;updatePL()">
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+            <label style="flex:1">Discounted rate months after (50%)</label>
+            <span id="pv-rent-disc" style="color:var(--ink);font-weight:600">12</span>
+            <input type="range" id="p-rent-disc" min="0" max="24" step="1" value="12" style="width:80px" oninput="document.getElementById('pv-rent-disc').textContent=this.value;updatePL()">
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label style="flex:1">Discount % during discounted period</label>
+            <span id="pv-rent-pct" style="color:var(--ink);font-weight:600">50%</span>
+            <input type="range" id="p-rent-pct" min="10" max="90" step="5" value="50" style="width:80px" oninput="document.getElementById('pv-rent-pct').textContent=this.value+'%';updatePL()">
+          </div>
+        </div>
         <div class="pe-field"><label>Business Rates <span id="pv-rates">75,000</span></label><input type="range" id="p-rates" min="20000" max="150000" step="2500" value="75000" oninput="updatePL()"></div>
         <div class="pe-field"><label>Service Charge <span id="pv-svc">60,000</span></label><input type="range" id="p-svc" min="0" max="120000" step="2500" value="60000" oninput="updatePL()"></div>
         <div class="pe-field"><label>Cleaning <span id="pv-clean">60,000</span></label><input type="range" id="p-clean" min="20000" max="100000" step="2500" value="60000" oninput="updatePL()"></div>
@@ -849,6 +867,20 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
         <div class="pe-field"><label>Food cost £/child/day <span id="pv-food">3.50</span></label><input type="range" id="p-food" min="0" max="10" step="0.25" value="3.5" oninput="updatePL()"></div>
         <div class="pe-field"><label>Merchant fees % <span id="pv-merch">1.5</span>%</label><input type="range" id="p-merch" min="0" max="3" step="0.1" value="1.5" oninput="updatePL()"></div>
         <div class="pe-field" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><label>One-off setup costs Y1 £ <span id="pv-setup">210,000</span></label><input type="range" id="p-setup" min="0" max="500000" step="10000" value="210000" oninput="updatePL()"></div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);background:var(--cream);border-radius:3px;padding:8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)">
+          <div style="color:var(--gold-dk);font-weight:600;margin-bottom:6px">PRE-OPENING PERIOD (Sep–Oct 2026)</div>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+            <label style="flex:1">Pre-opening months</label>
+            <span id="pv-preopening-months" style="color:var(--ink);font-weight:600">2</span>
+            <input type="range" id="p-preopening-months" min="0" max="6" step="1" value="2" style="width:80px" oninput="document.getElementById('pv-preopening-months').textContent=this.value;updatePL()">
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label style="flex:1">Opex % during pre-opening</label>
+            <span id="pv-preopening-pct" style="color:var(--ink);font-weight:600">100%</span>
+            <input type="range" id="p-preopening-pct" min="20" max="100" step="5" value="100" style="width:80px" oninput="document.getElementById('pv-preopening-pct').textContent=this.value+'%';updatePL()">
+          </div>
+          <div style="margin-top:4px;color:var(--muted);font-size:8px">Staff hired, no revenue. Costs appear as pre-opening months before M1 in Year 1 P&L.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -2180,8 +2212,24 @@ const STAFF_RATIOS={A:3,B:3.5,C:4,D:8}; // per group
 const HCLS={A:'c0',B:'c1',C:'c2',D:'c3'};
 
 function getCosts(){
+  const rentFull=+document.getElementById('p-rent').value;
+  const rentFreeMonths=+(document.getElementById('p-rent-free')?.value||12);
+  const rentDiscMonths=+(document.getElementById('p-rent-disc')?.value||12);
+  const rentDiscPct=+(document.getElementById('p-rent-pct')?.value||50)/100;
+  const preopeningMonths=+(document.getElementById('p-preopening-months')?.value||2);
+  const preopeningPct=+(document.getElementById('p-preopening-pct')?.value||100)/100;
+  // Effective annual rent for Year 1 (accounting for concession in first 12 operating months)
+  // Y1 operating = months 1-12 after launch (Nov 2026 onwards)
+  // Pre-opening months (Sep-Oct) are separate
+  const rentEffY1=rentFull*(1-rentDiscPct); // during discounted period
+  const rentEffY2=rentFull; // full rate after
   return{
-    rent:+document.getElementById('p-rent').value,
+    rent:rentFull,
+    rentFreeMonths, rentDiscMonths, rentDiscPct, preopeningMonths, preopeningPct,
+    // Monthly rent by phase:
+    rentMthFree:0,
+    rentMthDisc:rentFull*rentDiscPct===rentFull?rentFull/12:rentFull*(1-rentDiscPct)/12,
+    rentMthFull:rentFull/12,
     rates:+document.getElementById('p-rates').value,
     svc:+document.getElementById('p-svc').value,
     clean:+document.getElementById('p-clean').value,
@@ -2202,6 +2250,20 @@ function getCosts(){
     merch:+document.getElementById('p-merch').value/100,
     setup:+document.getElementById('p-setup').value,
   };
+}
+
+// Returns effective monthly rent for a given operating month (1-indexed, 1=first month after launch)
+function getRentForMonth(c, mo){
+  // mo=1 is first operating month (Nov 2026 = month 1 of trading)
+  // Pre-opening months are separate (not in RAMP, shown before M1)
+  if(mo<=c.rentFreeMonths) return 0; // rent-free
+  if(mo<=c.rentFreeMonths+c.rentDiscMonths) return c.rent*(1-c.rentDiscPct)/12; // discounted
+  return c.rent/12; // full rate
+}
+
+// Returns other fixed opex (excl rent) for a given month
+function getOtherFixedForMonth(c){
+  return (c.rates+c.svc+c.clean+c.heat+c.ins+c.mgmt+c.mgmtni+c.it+c.adv2+c.prof+c.cont)/12;
 }
 
 function updateCostLabels(c){
@@ -2812,11 +2874,13 @@ function buildY1Monthly(){
   const isB=y1Src==='B';
   const filteredGroups=y1Group==='all'?GROUPS:GROUPS.filter(g=>g.id===y1Group);
   const totalCapAll=GROUPS.reduce((a,g)=>a+(isB?B_CAPS[g.id]:g.cap),0);
-  const fixedOpexMthFull=(c.rent+c.rates+c.svc+c.clean+c.heat+c.ins+c.mgmt+c.mgmtni+c.it+c.adv+c.prof+c.cont)/12;
+  const otherFixedMthFull=getOtherFixedForMonth(c); // all fixed excl rent
   const fixedShare=y1Group==='all'?1:filteredGroups.reduce((a,g)=>a+(isB?B_CAPS[g.id]:g.cap),0)/Math.max(1,totalCapAll);
-  const fixedOpexMth=fixedOpexMthFull*fixedShare;
+  const otherFixedMth=otherFixedMthFull*fixedShare;
   const setupFull=c.setup;
   const setupMth1=setupFull*fixedShare;
+  const preopeningMonths=c.preopeningMonths||2;
+  const preopeningPct=c.preopeningPct||1;
 
   // Registration fees — Month 1 only
   const regFeeInfo=getRegFeeRevenue(isB?B_CAPS:Object.fromEntries(GROUPS.map(g=>[g.id,g.cap])));
@@ -2856,6 +2920,23 @@ function buildY1Monthly(){
     };
   }
 
+  // ── PRE-OPENING MONTHS (Sep, Oct = before any revenue) ──
+  const preMonths=[];
+  for(let pm=1;pm<=preopeningMonths;pm++){
+    const rentPre=getRentForMonth(c,-(preopeningMonths-pm+1))*fixedShare; // negative mo = before launch
+    const otherPre=otherFixedMth*preopeningPct;
+    const staffPre=filteredGroups.reduce((a,g)=>{
+      const cap=isB?B_CAPS[g.id]:g.cap;
+      const sn=Math.ceil(cap/STAFF_RATIOS[g.id]);
+      return a+sn*c.staffsal*(1+c.staffni)/12;
+    },0)*preopeningPct;
+    const totalCostPre=otherPre+staffPre; // no rent during pre-opening (rent-free period)
+    const ebitdaPre=-totalCostPre;
+    const netPre=ebitdaPre; // no tax on losses
+    const label=['Sep','Oct','Nov','Dec','Jan','Feb'][pm-1]||`Pre-M${pm}`;
+    preMonths.push({mo:'Pre-'+pm,label,occ:0,totalRev:0,sessionRev:0,govtTotal:0,privTotal:0,consTotal:0,earlyLate:0,regThisMo:0,totalStaff:staffPre,totalVar:0,totalMerch:0,grossProfit:-staffPre,otherFixedMth:otherPre,rentThisMo:0,setupThisMo:0,ebitda:ebitdaPre,tax:0,net:netPre,byGroup:{},isPreOpening:true});
+  }
+
   const months=[];
   for(let mo=1;mo<=12;mo++){
     const occ=mo<=RAMP.length?RAMP[mo-1]/100:0.95;
@@ -2878,22 +2959,28 @@ function buildY1Monthly(){
     const totalRevAll=sessionRev+earlyLate+regThisMo;
     totalMerch=totalRevAll*c.merch;  // recalc on full revenue
     const grossProfit=totalRevAll-totalStaff-totalVar-totalMerch;
-    const fixedThisMo=fixedOpexMth+(mo===1?setupMth1:0);
+    const rentThisMo=getRentForMonth(c,mo)*fixedShare;
+    const fixedThisMo=otherFixedMth+rentThisMo+(mo===1?setupMth1:0);
     const ebitda=grossProfit-fixedThisMo;
     const tax=Math.max(0,ebitda*0.25);
     const net=ebitda-tax;
-    months.push({mo,occ,totalRev:totalRevAll,sessionRev,govtTotal:totalGovt,privTotal:totalPriv,consTotal:totalCons,earlyLate,regThisMo,totalStaff,totalVar,totalMerch,grossProfit,fixedOpexMth,setupThisMo:mo===1?setupMth1:0,ebitda,tax,net,byGroup});
+    months.push({mo,occ,totalRev:totalRevAll,sessionRev,govtTotal:totalGovt,privTotal:totalPriv,consTotal:totalCons,earlyLate,regThisMo,totalStaff,totalVar,totalMerch,grossProfit,otherFixedMth,rentThisMo,setupThisMo:mo===1?setupMth1:0,ebitda,tax,net,byGroup});
   }
 
   // Build column headers
   const thStyle=`background:var(--ink);color:var(--paper);padding:6px 5px;text-align:right;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.05em;min-width:68px`;
+  const thPreStyle=`background:#3a2a1a;color:#c8a96a;padding:6px 5px;text-align:right;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.05em;min-width:60px`;
+  const allCols=[...preMonths,...months];
+  const totalCols=allCols.length;
   head.innerHTML=`<tr>
     <th style="${thStyle.replace('text-align:right','text-align:left')};min-width:200px">Item</th>
+    ${preMonths.map(m=>`<th style="${thPreStyle}" title="Pre-opening: no revenue">${m.label}<br><span style="font-size:7px;opacity:.7">pre-open</span></th>`).join('')}
     ${months.map(m=>`<th style="${thStyle}">M${m.mo}${m.mo===1?'*':''}</th>`).join('')}
-    <th style="${thStyle.replace('background:var(--ink)','background:var(--gold)').replace('color:var(--paper)','color:var(--ink)')};min-width:80px">Year 1</th>
+    <th style="${thStyle.replace('background:var(--ink)','background:var(--gold)').replace('color:var(--paper)','color:var(--ink)')};min-width:80px">Total</th>
   </tr>
   <tr style="background:var(--cream)">
     <td style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);padding:4px 12px;text-transform:uppercase;letter-spacing:.08em">Occupancy</td>
+    ${preMonths.map(()=>`<td style="text-align:center;padding:3px 4px"><span style="font-size:9px;padding:2px 4px;border-radius:2px;background:#e8dcc8;color:#6a4a2a">–</span></td>`).join('')}
     ${months.map(m=>`<td style="text-align:center;padding:3px 4px"><span style="font-size:9px;padding:2px 4px;border-radius:2px;background:${m.occ<0.7?'var(--rust-lt)':m.occ<0.9?'#fff3cd':'var(--sage-lt)'}">${Math.round(m.occ*100)}%</span></td>`).join('')}
     <td style="text-align:right;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);padding:3px 8px">${(months.reduce((a,m)=>a+m.occ,0)/12*100).toFixed(0)}% avg</td>
   </tr>`;
@@ -2926,7 +3013,7 @@ function buildY1Monthly(){
   // Helper for data rows
   const sum=key=>months.reduce((a,m)=>a+m[key],0);
   const tdS=`padding:5px 5px;text-align:right;font-family:'DM Mono',monospace;font-size:11px;border-bottom:1px solid var(--border)`;
-  function dataRow(label,vals,totVal,cls='',color=null,indent=false){
+  function dataRow(label,vals,totVal,cls='',color=null,indent=false,preVals=[]){
     const isProfit=cls.includes('profit')||cls.includes('subtotal');
     const bg=cls.includes('cost')?'background:var(--ev);':'';
     const bg2=isProfit?'background:var(--cream);font-weight:600;':'';
@@ -2959,31 +3046,39 @@ function buildY1Monthly(){
     // Day rate note for B
     const drNote=isB?` · £${getBlendedDayRate(g.id,1,B_CAPS).toFixed(0)}→£${getBlendedDayRate(g.id,12,B_CAPS).toFixed(0)}/day`:'';
     const specialNote=isB&&DISCOUNTS.prelaunch.enabled?` · ${distributeSpecialContracts(DISCOUNTS.prelaunch.totalContracts,B_CAPS)[g.id]||0} special contracts`:'';
+    const emptyPreCols=preMonths.map(()=>`<td style="${tdS};background:#fdf8f0;color:var(--muted)">—</td>`).join('');
     return `<tr class="pl-row" style="background:var(--ev)">
       <td style="padding:4px 12px 4px 20px;font-size:11.5px;color:var(--muted)">
         <span style="color:var(--muted);margin-right:4px">└</span>
         <strong style="color:var(--ink)">${g.label}</strong>
         <span style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);margin-left:6px">${capStr} places${drNote}${specialNote}</span>
       </td>
+      ${emptyPreCols}
       ${gVals.map(v=>`<td style="${tdS};background:var(--ev)">${fmt(v,true)}</td>`).join('')}
       <td style="${tdS};font-weight:700">${fmt(gTot,true)}</td>
     </tr>
     <tr style="background:#fafaf5">
       <td style="padding:3px 12px 3px 32px;font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted)">└ DfE (govt)</td>
+      ${emptyPreCols}
       ${govtVals.map(v=>`<td style="${tdS};font-size:9.5px;color:#1565C0;background:#fafaf5">${fmt(v,true)}</td>`).join('')}
       <td style="${tdS};font-size:9.5px;color:#1565C0;font-weight:600">${fmt(govtTot,true)}</td>
     </tr>
     <tr style="background:#fafaf5">
       <td style="padding:3px 12px 3px 32px;font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted)">└ Private fees</td>
+      ${emptyPreCols}
       ${privVals.map(v=>`<td style="${tdS};font-size:9.5px;color:var(--sage);background:#fafaf5">${fmt(v,true)}</td>`).join('')}
       <td style="${tdS};font-size:9.5px;color:var(--sage);font-weight:600">${fmt(privTot,true)}</td>
     </tr>`;
   }).join('');
 
+  // Helper to get pre-opening column values for a given key
+  const preVals=key=>preMonths.map(m=>m[key]||0);
+
   tb.innerHTML = drRow +
     sHdr('Revenue') +
     `<tr class="pl-row subtotal">
       <td style="padding:6px 12px;font-size:12.5px;font-weight:600">Session fees (${y1Group==='all'?'all groups':filteredGroups[0].label})</td>
+      ${preMonths.map(()=>`<td style="${tdS};background:#fdf8f0;color:var(--muted)">—</td>`).join('')}
       ${months.map(m=>`<td style="${tdS};background:var(--cream);font-weight:600">${fmt(m.sessionRev,true)}</td>`).join('')}
       <td style="${tdS};background:var(--cream);font-weight:700">${fmt(sum('sessionRev'),true)}</td>
     </tr>` +
@@ -2992,20 +3087,22 @@ function buildY1Monthly(){
     dataRow('Registration fees (Month 1 only)', months.map(m=>m.regThisMo), sum('regThisMo'), '', v=>v>0?'var(--gold-dk)':'var(--muted)', true) +
     dataRow('Total Revenue', months.map(m=>m.totalRev), sum('totalRev'), 'pl-row subtotal') +
     sHdr('Direct Costs') +
-    dataRow('Nursery staff (salaries + NI/pension)', months.map(m=>-m.totalStaff), -sum('totalStaff'), 'pl-row cost', neg) +
+    dataRow('Nursery staff (salaries + NI/pension)', months.map(m=>-m.totalStaff), -sum('totalStaff'), 'pl-row cost', neg, false, preMonths.map(m=>-m.totalStaff)) +
     dataRow('Food & art materials', months.map(m=>-m.totalVar), -sum('totalVar'), 'pl-row cost', neg) +
     dataRow('Merchant / payment fees', months.map(m=>-m.totalMerch), -sum('totalMerch'), 'pl-row cost', neg, true) +
     dataRow('Total Direct Costs', months.map(m=>-(m.totalStaff+m.totalVar+m.totalMerch)), -(sum('totalStaff')+sum('totalVar')+sum('totalMerch')), 'pl-row subtotal', neg) +
-    dataRow('Gross Profit', months.map(m=>m.grossProfit), sum('grossProfit'), 'pl-row subtotal', posNeg) +
+    dataRow('Gross Profit', months.map(m=>m.grossProfit), sum('grossProfit'), 'pl-row subtotal', posNeg, false, preMonths.map(m=>m.grossProfit)) +
     sHdr('Fixed Opex') +
-    dataRow('Fixed operating costs', months.map(m=>-m.fixedOpexMth), -sum('fixedOpexMth'), 'pl-row cost', neg) +
-    dataRow('One-off setup costs (Month 1)', months.map(m=>-m.setupThisMo), -sum('setupThisMo'), 'pl-row cost', neg, true) +
-    dataRow('EBITDA', months.map(m=>m.ebitda), sum('ebitda'), 'pl-row subtotal', posNeg) +
+    dataRow('Rent (with concession)', months.map(m=>-m.rentThisMo), -sum('rentThisMo'), 'pl-row cost', neg, false, preMonths.map(m=>-m.rentThisMo)) +
+    dataRow('Other fixed opex', months.map(m=>-m.otherFixedMth), -sum('otherFixedMth'), 'pl-row cost', neg, false, preMonths.map(m=>-m.otherFixedMth)) +
+    dataRow('One-off setup costs (Month 1)', months.map(m=>-m.setupThisMo), -sum('setupThisMo'), 'pl-row cost', neg, true, preMonths.map(m=>0)) +
+    dataRow('EBITDA', months.map(m=>m.ebitda), sum('ebitda'), 'pl-row subtotal', posNeg, false, preMonths.map(m=>m.ebitda)) +
     dataRow('Tax (25% of profit)', months.map(m=>-m.tax), -sum('tax'), '', neg, true) +
     `<tr class="pl-row ${sum('net')>=0?'profit':'loss'}">
       <td style="padding:7px 12px;font-size:13px;font-weight:700">Net Profit / Loss</td>
+      ${preMonths.map(m=>`<td style="${tdS};font-weight:700;background:#fdf0e8;color:${posNeg(m.net)}">${fmt(m.net,true)}</td>`).join('')}
       ${months.map(m=>`<td style="${tdS};font-weight:700;color:${posNeg(m.net)}">${fmt(m.net,true)}</td>`).join('')}
-      <td style="${tdS};font-weight:700;font-size:13px;color:${posNeg(sum('net'))}">${fmt(sum('net'),true)}</td>
+      <td style="${tdS};font-weight:700;font-size:13px;color:${posNeg(preMonths.reduce((a,m)=>a+m.net,0)+sum('net'))}">${fmt(preMonths.reduce((a,m)=>a+m.net,0)+sum('net'),true)}</td>
     </tr>`;
 }
 
