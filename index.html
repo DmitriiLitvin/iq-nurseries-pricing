@@ -837,31 +837,31 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
           <div style="display:flex;gap:8px;align-items:center">
             <label style="flex:1">Discount % during discounted period</label>
             <span id="pv-rent-pct" style="color:var(--ink);font-weight:600">50%</span>
-            <input type="range" id="p-rent-pct" min="10" max="90" step="5" value="50" style="width:80px" oninput="document.getElementById('pv-rent-pct').textContent=this.value+'%';updatePL()">
+            <input type="range" id="p-rent-pct" min="0" max="90" step="5" value="50" style="width:80px" oninput="document.getElementById('pv-rent-pct').textContent=this.value+'%';updatePL()">
           </div>
         </div>
-        <div class="pe-field"><label>Business Rates <span id="pv-rates">75,000</span></label><input type="range" id="p-rates" min="20000" max="150000" step="2500" value="75000" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Business Rates <span id="pv-rates">75,000</span></label><input type="range" id="p-rates" min="0" max="150000" step="2500" value="75000" oninput="updatePL()"></div>
         <div class="pe-field"><label>Service Charge <span id="pv-svc">60,000</span></label><input type="range" id="p-svc" min="0" max="120000" step="2500" value="60000" oninput="updatePL()"></div>
-        <div class="pe-field"><label>Cleaning <span id="pv-clean">60,000</span></label><input type="range" id="p-clean" min="20000" max="100000" step="2500" value="60000" oninput="updatePL()"></div>
-        <div class="pe-field"><label>Light &amp; Heat <span id="pv-heat">28,800</span></label><input type="range" id="p-heat" min="10000" max="60000" step="1200" value="28800" oninput="updatePL()"></div>
-        <div class="pe-field"><label>Insurance <span id="pv-ins">12,000</span></label><input type="range" id="p-ins" min="5000" max="30000" step="1000" value="12000" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Cleaning <span id="pv-clean">60,000</span></label><input type="range" id="p-clean" min="0" max="100000" step="2500" value="60000" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Light &amp; Heat <span id="pv-heat">28,800</span></label><input type="range" id="p-heat" min="0" max="60000" step="1200" value="28800" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Insurance <span id="pv-ins">12,000</span></label><input type="range" id="p-ins" min="0" max="30000" step="1000" value="12000" oninput="updatePL()"></div>
       </div>
       <!-- Fixed costs col 2 -->
       <div>
         <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Management &amp; Admin (£/year)</div>
-        <div class="pe-field"><label>Senior Management <span id="pv-mgmt">144,996</span></label><input type="range" id="p-mgmt" min="60000" max="300000" step="5000" value="144996" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Senior Management <span id="pv-mgmt">144,996</span></label><input type="range" id="p-mgmt" min="0" max="300000" step="5000" value="144996" oninput="updatePL()"></div>
         <div class="pe-field"><label>Mgmt NI/Pension (19%) <span id="pv-mgmtni">27,549</span></label><input type="range" id="p-mgmtni" min="0" max="60000" step="1000" value="27549" oninput="updatePL()"></div>
-        <div class="pe-field"><label>IT Systems <span id="pv-it">6,000</span></label><input type="range" id="p-it" min="2000" max="20000" step="500" value="6000" oninput="updatePL()"></div>
-        <div class="pe-field"><label>Advertising Y1 <span id="pv-adv">13,500</span></label><input type="range" id="p-adv" min="5000" max="50000" step="500" value="13500" oninput="updatePL()"></div>
-        <div class="pe-field"><label>Advertising Y2+ <span id="pv-adv2">6,000</span></label><input type="range" id="p-adv2" min="2000" max="30000" step="500" value="6000" oninput="updatePL()"></div>
-        <div class="pe-field"><label>Professional/Legal <span id="pv-prof">93,600</span></label><input type="range" id="p-prof" min="20000" max="200000" step="2500" value="93600" oninput="updatePL()"></div>
+        <div class="pe-field"><label>IT Systems <span id="pv-it">6,000</span></label><input type="range" id="p-it" min="0" max="20000" step="500" value="6000" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Advertising Y1 <span id="pv-adv">13,500</span></label><input type="range" id="p-adv" min="0" max="50000" step="500" value="13500" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Advertising Y2+ <span id="pv-adv2">6,000</span></label><input type="range" id="p-adv2" min="0" max="30000" step="500" value="6000" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Professional/Legal <span id="pv-prof">93,600</span></label><input type="range" id="p-prof" min="0" max="200000" step="2500" value="93600" oninput="updatePL()"></div>
         <div class="pe-field"><label>Contingency <span id="pv-cont">99,996</span></label><input type="range" id="p-cont" min="0" max="200000" step="5000" value="99996" oninput="updatePL()"></div>
       </div>
       <!-- Variable costs col 3 -->
       <div>
         <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Variable / Per-Child Costs</div>
-        <div class="pe-field"><label>Nursery staff avg salary £/yr <span id="pv-staffsal">28,000</span></label><input type="range" id="p-staffsal" min="20000" max="40000" step="500" value="28000" oninput="updatePL()"></div>
-        <div class="pe-field"><label>Staff NI/Pension % <span id="pv-staffni">19</span>%</label><input type="range" id="p-staffni" min="10" max="30" step="1" value="19" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Nursery staff avg salary £/yr <span id="pv-staffsal">28,000</span></label><input type="range" id="p-staffsal" min="0" max="40000" step="500" value="28000" oninput="updatePL()"></div>
+        <div class="pe-field"><label>Staff NI/Pension % <span id="pv-staffni">19</span>%</label><input type="range" id="p-staffni" min="0" max="30" step="1" value="19" oninput="updatePL()"></div>
         <div class="pe-field"><label>Staff training/expenses £/yr <span id="pv-train">500</span></label><input type="range" id="p-train" min="0" max="2000" step="100" value="500" oninput="updatePL()"></div>
         <div class="pe-field"><label>Art/materials £/child/mth <span id="pv-art">5</span></label><input type="range" id="p-art" min="0" max="20" step="1" value="5" oninput="updatePL()"></div>
         <div class="pe-field"><label>Food cost £/child/day <span id="pv-food">3.50</span></label><input type="range" id="p-food" min="0" max="10" step="0.25" value="3.5" oninput="updatePL()"></div>
@@ -877,7 +877,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
           <div style="display:flex;gap:8px;align-items:center">
             <label style="flex:1">Opex % during pre-opening</label>
             <span id="pv-preopening-pct" style="color:var(--ink);font-weight:600">100%</span>
-            <input type="range" id="p-preopening-pct" min="20" max="100" step="5" value="100" style="width:80px" oninput="document.getElementById('pv-preopening-pct').textContent=this.value+'%';updatePL()">
+            <input type="range" id="p-preopening-pct" min="0" max="100" step="5" value="100" style="width:80px" oninput="document.getElementById('pv-preopening-pct').textContent=this.value+'%';updatePL()">
           </div>
           <div style="margin-top:4px;color:var(--muted);font-size:8px">Staff hired, no revenue. Costs appear as pre-opening months before M1 in Year 1 P&L.</div>
         </div>
