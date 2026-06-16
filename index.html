@@ -389,7 +389,7 @@ input.ag-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:1
           <tr class="ev"><td><strong>Fennies Ealing</strong></td><td>W5</td><td>88</td><td>07:45–18</td><td>51</td><td class="hi">£112.50</td><td class="hi">£112.50</td><td class="hi">£112.50</td><td>Yes</td><td>£112.50</td><td><span class="badge b-gd">Good</span></td><td><a class="src" href="https://www.fennies.com/our-nurseries/ealing-junction-road" target="_blank">fennies.com ↗</a> <em style="font-size:10px">✉ May 2026: <strong>only 4 spaces left under 3yrs</strong> — next availability March 2027</em></td></tr>
           <tr class="ev"><td><strong>Busy Bees Ealing Common</strong></td><td>W5</td><td>~100</td><td>07:30–18</td><td>51</td><td class="mid">~£105</td><td class="mid">~£100</td><td class="mid">~£95</td><td>Yes</td><td>~£95–£105</td><td><span class="badge b-os">Outstanding</span></td><td><a class="src" href="https://www.busybeeschildcare.co.uk/nursery/ealing-common" target="_blank">busybeeschildcare.co.uk ↗</a></td></tr>
           <tr class="ev"><td><strong>Busy Bees Acton 2 (Grove)</strong></td><td>W3</td><td>116</td><td>07:30–18</td><td>51</td><td class="mid">~£105</td><td class="mid">~£100</td><td class="mid">~£95</td><td>Yes</td><td>~£95–£105</td><td><span class="badge b-os">Outstanding</span></td><td><a class="src" href="https://www.busybeeschildcare.co.uk/nursery/ealing2b" target="_blank">busybeeschildcare.co.uk ↗</a></td></tr>
-          <tr class="ev"><td><strong>Buttercups Ealing</strong></td><td>W5</td><td>69</td><td>07–18:30</td><td>51</td><td class="mid">~£92–£110</td><td class="mid">~£92–£110</td><td class="mid">~£92–£110</td><td>No</td><td>~£100–£119</td><td><span class="badge b-os">Outstnd. (hist.)</span></td><td><a class="src" href="https://buttercups-nursery.co.uk/fees.html" target="_blank">buttercups-nursery.co.uk ↗</a></td></tr>
+          <tr class="ev"><td><strong>Buttercups Ealing</strong></td><td>W5</td><td>69</td><td>07–18:30</td><td>51</td><td class="mid">~£92–£110</td><td class="mid">~£92–£110</td><td class="mid">~£92–£110</td><td>No</td><td>~£100–£119</td><td><span class="badge b-os">Outstnd. (hist.)</span></td><td><a class="src" href="https://buttercups-nursery.co.uk/fees.html" target="_blank">buttercups-nursery.co.uk ↗</a> <em style="font-size:10px">✉ Jun 2026: <strong>waiting list closed, no viewings</strong> — "nursery is extremely busy"</em></td></tr>
           <tr class="ev"><td><strong>Cybertots Acton Gardens</strong></td><td>W3</td><td>~60</td><td>07:30–18:30</td><td>50</td><td colspan="3" style="font-size:11px;font-family:'DM Mono',monospace">£21/h U3 · £22.15/h O3 (hourly — 10h day = £210–£221)</td><td>+£28/d</td><td>~£238–£249 all-in</td><td><span class="badge b-gd">Good</span></td><td><a class="src" href="https://cybertots.co.uk/cybertots-at-acton-gardens/" target="_blank">cybertots.co.uk ↗</a> <em style="font-size:10px">⚠ hourly</em></td></tr>
           <tr class="ev"><td><strong>Hungry Caterpillar W.Ealing</strong></td><td>W13</td><td>~54</td><td>07:30–18:30</td><td>51</td><td class="mid">~£90–£95</td><td class="mid">~£88–£92</td><td class="mid">~£85–£90</td><td>Yes</td><td>~£85–£95</td><td><span class="badge b-gd">Good</span></td><td><a class="src" href="https://hungrycaterpillars.co.uk/" target="_blank">hungrycaterpillars.co.uk ↗</a></td></tr>
           <tr class="excl"><td><strong>Bumble Bees (excl.)</strong></td><td>W5</td><td>~30</td><td>09–17</td><td>44</td><td class="lo">£75</td><td class="lo">£75</td><td class="lo">£75</td><td>No</td><td class="lo">£75</td><td><span class="badge b-ex">Excl.</span></td><td><a class="src" href="https://bumblebeesdaynursery.co.uk/wp-content/uploads/2025/01/Funding-fee-structure-2025.pdf" target="_blank">PDF ↗</a></td></tr>
@@ -3083,21 +3083,21 @@ function buildY1Monthly(){
       <td style="${tdS};background:var(--cream);font-weight:700">${fmt(sum('sessionRev'),true)}</td>
     </tr>` +
     groupSubRows +
-    dataRow('Early start + Late pick-up', months.map(m=>m.earlyLate), sum('earlyLate'), '', null, true) +
-    dataRow('Registration fees (Month 1 only)', months.map(m=>m.regThisMo), sum('regThisMo'), '', v=>v>0?'var(--gold-dk)':'var(--muted)', true) +
-    dataRow('Total Revenue', months.map(m=>m.totalRev), sum('totalRev'), 'pl-row subtotal') +
+    dataRow('Early start + Late pick-up', months.map(m=>m.earlyLate), sum('earlyLate'), '', null, true, preMonths.map(()=>0)) +
+    dataRow('Registration fees (Month 1 only)', months.map(m=>m.regThisMo), sum('regThisMo'), '', v=>v>0?'var(--gold-dk)':'var(--muted)', true, preMonths.map(()=>0)) +
+    dataRow('Total Revenue', months.map(m=>m.totalRev), sum('totalRev'), 'pl-row subtotal', null, false, preMonths.map(()=>0)) +
     sHdr('Direct Costs') +
     dataRow('Nursery staff (salaries + NI/pension)', months.map(m=>-m.totalStaff), -sum('totalStaff'), 'pl-row cost', neg, false, preMonths.map(m=>-m.totalStaff)) +
-    dataRow('Food & art materials', months.map(m=>-m.totalVar), -sum('totalVar'), 'pl-row cost', neg) +
-    dataRow('Merchant / payment fees', months.map(m=>-m.totalMerch), -sum('totalMerch'), 'pl-row cost', neg, true) +
-    dataRow('Total Direct Costs', months.map(m=>-(m.totalStaff+m.totalVar+m.totalMerch)), -(sum('totalStaff')+sum('totalVar')+sum('totalMerch')), 'pl-row subtotal', neg) +
+    dataRow('Food & art materials', months.map(m=>-m.totalVar), -sum('totalVar'), 'pl-row cost', neg, false, preMonths.map(m=>-m.totalVar)) +
+    dataRow('Merchant / payment fees', months.map(m=>-m.totalMerch), -sum('totalMerch'), 'pl-row cost', neg, true, preMonths.map(m=>-m.merchantFee||0)) +
+    dataRow('Total Direct Costs', months.map(m=>-(m.totalStaff+m.totalVar+m.totalMerch)), -(sum('totalStaff')+sum('totalVar')+sum('totalMerch')), 'pl-row subtotal', neg, false, preMonths.map(m=>-(m.totalStaff+m.totalVar+(m.merchantFee||0)))) +
     dataRow('Gross Profit', months.map(m=>m.grossProfit), sum('grossProfit'), 'pl-row subtotal', posNeg, false, preMonths.map(m=>m.grossProfit)) +
     sHdr('Fixed Opex') +
     dataRow('Rent (with concession)', months.map(m=>-m.rentThisMo), -sum('rentThisMo'), 'pl-row cost', neg, false, preMonths.map(m=>-m.rentThisMo)) +
     dataRow('Other fixed opex', months.map(m=>-m.otherFixedMth), -sum('otherFixedMth'), 'pl-row cost', neg, false, preMonths.map(m=>-m.otherFixedMth)) +
     dataRow('One-off setup costs (Month 1)', months.map(m=>-m.setupThisMo), -sum('setupThisMo'), 'pl-row cost', neg, true, preMonths.map(m=>0)) +
     dataRow('EBITDA', months.map(m=>m.ebitda), sum('ebitda'), 'pl-row subtotal', posNeg, false, preMonths.map(m=>m.ebitda)) +
-    dataRow('Tax (25% of profit)', months.map(m=>-m.tax), -sum('tax'), '', neg, true) +
+    dataRow('Tax (25% of profit)', months.map(m=>-m.tax), -sum('tax'), '', neg, true, preMonths.map(()=>0)) +
     `<tr class="pl-row ${sum('net')>=0?'profit':'loss'}">
       <td style="padding:5px 10px;font-size:11.5px;font-weight:700">Net Profit / Loss</td>
       ${preMonths.map(m=>`<td style="${tdS};font-weight:700;background:#fdf0e8;color:${posNeg(m.net)}">${fmt(m.net,true)}</td>`).join('')}
